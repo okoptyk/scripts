@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Продажа очков онлайн · Скрипты</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">👁 Скрипты <span>Еврооптика · OkOptyk</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="kvалификация.html">Квалификация</a></li>
+      <li><a href="belarus.html">Запись BY</a></li>
+      <li><a href="poland.html">Запись PL</a></li>
+      <li><a href="podtverzdenie.html">Подтверждение</a></li>
+      <li><a href="kommunikaciya.html">В салоне</a></li>
+      <li><a href="prodazha-online.html" class="active">Онлайн-продажи</a></li>
+      <li><a href="gotovnost-zakaza.html">Готовность заказа</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="badge">💻 OkOptyk · Польша</span>
+    <h1>Продажа очков онлайн</h1>
+    <p>Помогаем клиенту выбрать и оформить заказ дистанционно — с доставкой по Польше</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('main', this)">🛍 Основной сценарий</button>
+    <button class="tab-btn" onclick="switchTab('lost', this)">😶 Клиент пропал</button>
+  </div>
+
+  <!-- ══════ ОСНОВНОЙ СЦЕНАРИЙ ══════ -->
+  <div class="tab-panel active" id="tab-main">
+
+    <div class="info-box">
+      Клиент пишет сам и хочет заказать очки с доставкой. Задача — помочь подобрать оправу и оформить заказ, не торопя клиента.
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">1</span> Приветствие и запрос рецепта</div>
+        <div class="step-body">
+          <div class="dialogue">
+            <div class="msg client">
+              <div class="msg-label">Клиент</div>
+              Здравствуйте. Хочу заказать очки по своему рецепту с доставкой по Польше.
+            </div>
+            <div class="msg consultant">
+              <div class="msg-label">Консультант</div>
+              Здравствуйте 😊<br><br>
+              С удовольствием поможем подобрать для вас очки.<br><br>
+              Пришлите, пожалуйста, рецепт на очки, а также подскажите:<br>
+              • уже носите очки сейчас?<br>
+              • нужна только замена очков или хотите попробовать новую форму оправы?
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">2</span> Уточнение предпочтений по оправе</div>
+        <div class="step-body">
+          <div class="dialogue">
+            <div class="msg client">
+              <div class="msg-label">Клиент</div>
+              Да, ношу очки постоянно. Хочу новые.
+            </div>
+            <div class="msg consultant">
+              <div class="msg-label">Консультант</div>
+              Отлично 😊<br><br>
+              Тогда помогу подобрать вариант, который будет комфортным именно для вас.<br><br>
+              Подскажите, пожалуйста:<br>
+              • какая форма оправ вам нравится — более классическая или современная?<br>
+              • предпочитаете металл или пластик?<br>
+              • есть ли пожелания по цвету?
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">3</span> Уточнение бюджета</div>
+        <div class="step-body">
+          <div class="dialogue">
+            <div class="msg client">
+              <div class="msg-label">Клиент</div>
+              Люблю металлические оправы. Что-то универсальное.
+            </div>
+            <div class="msg consultant">
+              <div class="msg-label">Консультант</div>
+              Поняла 😊<br><br>
+              Чтобы подобрать подходящие модели, отправлю вам несколько вариантов оправ, которые хорошо подойдут под ваши параметры и будут комфортны для постоянного ношения.<br><br>
+              Подскажите, пожалуйста, ориентировочный бюджет на готовые очки:<br>
+              • до 500 zł<br>
+              • 500–1000 zł<br>
+              • 1000 zł+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">4</span> Отправка подборки оправ</div>
+        <div class="step-body">
+          <div class="dialogue">
+            <div class="msg client">
+              <div class="msg-label">Клиент</div>
+              До 1000 zł.
+            </div>
+            <div class="msg consultant">
+              <div class="msg-label">Консультант</div>
+              Отлично.<br><br>
+              Тогда подготовлю для вас несколько вариантов в этом бюджете и сразу рассчитаю ориентировочную стоимость очков с линзами по вашему рецепту 😊<br><br>
+              <em class="note">(Отправляем подборку оправ)</em>
+            </div>
+            <div class="msg consultant" style="background:#f0faf9;">
+              <div class="msg-label">Консультант — подборка</div>
+              Подготовила для вас несколько вариантов.<br><br>
+              №1 — классическая металлическая оправа<br>
+              №2 — более лёгкая минималистичная модель<br>
+              №3 — универсальная модель для ежедневного ношения<br><br>
+              Какая нравится больше всего?
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">5</span> Расчёт стоимости и оформление заказа</div>
+        <div class="step-body">
+          <div class="dialogue">
+            <div class="msg client">
+              <div class="msg-label">Клиент</div>
+              Первая.
+            </div>
+            <div class="msg consultant">
+              <div class="msg-label">Консультант</div>
+              Хороший выбор 😊<br><br>
+              В данной оправе стоимость очков по вашему рецепту составит <strong>890 zł</strong> вместе с линзами.<br><br>
+              В стоимость входит:<br>
+              ✔ изготовление линз по вашему рецепту<br>
+              ✔ установка линз в оправу<br>
+              ✔ настройка очков перед отправкой<br>
+              ✔ доставка по Польше<br><br>
+              Если вариант подходит, могу подготовить заказ и отправить данные для оформления 😊<br><br>
+              Для оформления понадобятся:<br>
+              • имя и фамилия<br>
+              • номер телефона<br>
+              • адрес доставки
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════ КЛИЕНТ ПРОПАЛ ══════ -->
+  <div class="tab-panel" id="tab-lost">
+
+    <div class="info-box">
+      Клиент прислал рецепт и перестал отвечать. Не давим, но напоминаем — мягко и с пользой для клиента.
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">1</span> Сразу после получения рецепта</div>
+        <div class="step-body">
+          <div class="msg consultant">
+            <div class="msg-label">Консультант</div>
+            Спасибо за рецепт 😊<br><br>
+            Сейчас подготовлю расчёт и помогу подобрать подходящие варианты оправ.<br><br>
+            <em class="note">(Отправили расчёт — клиент не ответил)</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">2</span> Через 1 день</div>
+        <div class="step-body">
+          <div class="msg consultant">
+            <div class="msg-label">Консультант</div>
+            Здравствуйте 🤗<br><br>
+            Подготовила для вас расчёт по рецепту.<br><br>
+            Также могу подобрать несколько оправ под ваши параметры и пожелания.<br><br>
+            Подскажите, больше нравятся металлические или пластиковые оправы?
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">3</span> Через 3 дня</div>
+        <div class="step-body">
+          <div class="msg consultant">
+            <div class="msg-label">Консультант</div>
+            Здравствуйте 🙃<br><br>
+            Если ещё рассматриваете покупку очков, могу показать варианты. Удобно ли сейчас подобрать оправы/линзы?
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-num">4</span> Через 7 дней</div>
+        <div class="step-body">
+          <div class="msg consultant">
+            <div class="msg-label">Консультант</div>
+            Здравствуйте 😊<br><br>
+            Подскажите, удалось уже решить вопрос с новыми очками или пока ещё находитесь в поиске?<br><br>
+            Если понадобится помощь — с удовольствием помогу подобрать подходящий вариант.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tip-block">
+      <h4>💡 Принцип работы с «потерявшимся» клиентом</h4>
+      <ul>
+        <li>Не давим и не торопим — человек может быть занят или думает.</li>
+        <li>Каждое напоминание добавляет ценность: подборка, расчёт, вопрос о предпочтениях.</li>
+        <li>После 4-го касания без ответа — переносим в отложенные и возвращаемся через месяц.</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

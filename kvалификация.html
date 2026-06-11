@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Квалификация клиента · Скрипты</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">👁 Скрипты <span>Еврооптика · OkOptyk</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="kvалификация.html" class="active">Квалификация</a></li>
+      <li><a href="belarus.html">Запись BY</a></li>
+      <li><a href="poland.html">Запись PL</a></li>
+      <li><a href="podtverzdenie.html">Подтверждение</a></li>
+      <li><a href="kommunikaciya.html">В салоне</a></li>
+      <li><a href="prodazha-online.html">Онлайн-продажи</a></li>
+      <li><a href="gotovnost-zakaza.html">Готовность заказа</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="badge">🔍 Этап 1</span>
+    <h1>Квалификация клиента</h1>
+    <p>Первый контакт — определяем потребность клиента и выбираем дальнейший сценарий работы</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="meta-block">
+    <div class="meta-item"><span class="meta-label">ЦКП</span><span class="meta-value">Потребность определена, сценарий выбран</span></div>
+    <div class="meta-item"><span class="meta-label">Дедлайн</span><span class="meta-value">1 рабочий день</span></div>
+    <div class="meta-item"><span class="meta-label">Ответственный</span><span class="meta-value">Продавец-консультант, Менеджер</span></div>
+    <div class="meta-item"><span class="meta-label">Каналы</span><span class="meta-value">Звонок · Мессенджер</span></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('phone')">📞 Звонок</button>
+    <button class="tab-btn" onclick="switchTab('messenger')">💬 Мессенджер</button>
+  </div>
+
+  <!-- ══════ ЗВОНОК ══════ -->
+  <div class="tab-panel active" id="tab-phone">
+
+    <div class="phase">
+      <div class="phase-title">Этап 1 · Приветствие и перехват инициативы</div>
+      <div class="phase-goal">Цель: представиться и сразу перевести звонок в формат диалога-опроса, чтобы клиент не просто спросил «Сколько стоит?» и положил трубку.</div>
+      <div class="phase-body">
+        <div class="dialogue">
+          <div class="msg consultant">
+            <div class="msg-label">Консультант</div>
+            «Добрый день! Салон оптики [Название], меня зовут [Имя]. Слушаю вас!»
+          </div>
+          <div class="msg client">
+            <div class="msg-label">Клиент</div>
+            (Задаёт свой вопрос, например: «Хочу очки заказать» или «Сколько стоит проверка зрения?»)
+          </div>
+          <div class="msg consultant">
+            <div class="msg-label">Консультант</div>
+            «Да, конечно, я с удовольствием всё расскажу и сориентирую вас по ценам. Чтобы я подобрала для вас самое выгодное предложение, разрешите задать буквально пару уточняющих вопросов?»
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Этап 2 · Блок квалификации по телефону (5 вопросов)</div>
+      <div class="phase-goal">Цель: быстро собрать информацию, ведя клиента по логической цепочке.</div>
+      <div class="phase-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-header"><span class="step-num">1</span> Причина обращения</div>
+            <div class="step-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Подскажите, вы планируете заказать новые очки (для чтения, компьютера, постоянного ношения) или вас интересуют контактные линзы?»
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-header"><span class="step-num">2–3</span> Рецепт и диагностика</div>
+            <div class="step-body">
+              <div class="dialogue">
+                <div class="msg consultant">
+                  <div class="msg-label">Консультант</div>
+                  «Уточните, пожалуйста, у вас уже есть на руках готовый рецепт от врача или нам нужно будет проверить зрение и выписать рецепт на месте, прямо в салоне?»
+                </div>
+                <div class="msg consultant" style="background:#f0faf9;">
+                  <div class="msg-label" style="color:#888;">Если рецепт есть — уточняем дополнительно</div>
+                  «Подскажите, а как давно вы его выписывали? Если прошло больше полугода-года, доктора обычно рекомендуют обновить данные перед заказом новых линз».
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-header"><span class="step-num">4–5</span> Личный визит</div>
+            <div class="step-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Вы планируете приехать к нам в салон лично, чтобы примерить оправы, или хотите оформить доставку готового товара (например, линз)?»
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Этап 3 · Маршрутизация и закрытие на действие</div>
+      <div class="phase-goal">После ответов клиента — не просто даём информацию, а закрываем звонок конкретным предложением.</div>
+      <div class="phase-body">
+        <div class="scenarios">
+
+          <div class="scenario">
+            <div class="scenario-header">
+              <span class="scenario-label">Сценарий А</span>&nbsp; Рецепт есть + Личный визит → Запись на подбор оправы
+            </div>
+            <div class="scenario-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Отлично! Раз действующий рецепт у вас на руках, мы сразу сможем перейти к выбору. У нас сейчас как раз [поступила новая коллекция оправ / действует акция на линзы для очков]. Чтобы вам не пришлось ждать и я могла уделить вам максимум времени, давайте забронируем за вами удобный час? Вам комфортнее подъехать в будни или в выходные?»
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario">
+            <div class="scenario-header">
+              <span class="scenario-label">Сценарий Б</span>&nbsp; Рецепта нет / Нужна диагностика + Личный визит → Запись к врачу
+            </div>
+            <div class="scenario-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Я вас поняла. В таком случае мы начнём с полной диагностики зрения. Наш врач-оптометрист проверит глаза, проведёт тесты и выпишет точный рецепт прямо под ваши задачи. Подскажите, вам удобно было бы подъехать сегодня во второй половине дня или лучше записаться на завтра/выходные?»<br>
+                <em class="note">* Если диагностика бесплатна при покупке очков, обязательно добавляем: «При заказе очков диагностика у нас идёт в подарок».</em>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario">
+            <div class="scenario-header">
+              <span class="scenario-label">Сценарий В</span>&nbsp; Покупка готового товара / Дистанционный заказ
+            </div>
+            <div class="scenario-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Хорошо, если вам нужны только контактные линзы/раствор и параметры вы помните, ехать к доктору не обязательно. Напомните, пожалуйста, какую марку вы носите и какие у вас диоптрии? Я сейчас прямо при вас проверю наличие на складе и мы решим: отложить их в салоне к вашему приезду или оформить доставку».
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <h4>🛠 Лайфхаки для телефонных продаж в оптике</h4>
+      <ul>
+        <li><strong>Не называйте «голую» цену.</strong> Если клиент спрашивает «Сколько стоят линзы?», отвечать «От 3000 рублей» — это потеря клиента. Правильно: «Цены на линзы зависят от рецепта и защитных покрытий, есть варианты от... и до... Скажите, а какой у вас рецепт?» — и уходите на вопросы квалификации.</li>
+        <li><strong>Продавайте визит, а не очки.</strong> По телефону невозможно примерить оправу. Цель звонка — сделать так, чтобы клиент ногами пришёл в салон или записался к врачу.</li>
+        <li><strong>Альтернативные вопросы.</strong> Всегда завершайте предложение записи выбором без выбора: «Вам удобно в 14:00 или в 18:30?», «Будни или выходные?» — это подталкивает клиента к принятию решения.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ══════ МЕССЕНДЖЕР ══════ -->
+  <div class="tab-panel" id="tab-messenger">
+
+    <div class="info-box">
+      <strong>Главные правила онлайн-общения:</strong>
+      <ul style="margin-top:8px;">
+        <li><strong>Короткие сообщения:</strong> никаких «простыней» текста. Одно сообщение — одна мысль и один вопрос в конце.</li>
+        <li><strong>Визуализация и ссылки:</strong> активно используйте ссылки на карту, онлайн-запись и фото/видео.</li>
+        <li><strong>Скорость и вовлечение:</strong> чат легко закрыть и забыть, поэтому каждый ответ должен подталкивать к действию.</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Этап 1 · Приветствие и перехват инициативы</div>
+      <div class="phase-goal">Цель: показать, что на связи живой человек, и сразу задать вектор беседы.</div>
+      <div class="phase-body">
+        <div class="msg consultant">
+          <div class="msg-label">Консультант</div>
+          «Добрый день! Меня зовут [Имя], я консультант оптики [Название]. С удовольствием помогу вам. Подскажите, вы хотите подобрать очки, контактные линзы или вас интересует проверка зрения у врача?»
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Этап 2 · Блок квалификации — пошаговый чат-диалог</div>
+      <div class="phase-goal">Важно: не задавайте все вопросы одновременно. Двигайтесь пошагово.</div>
+      <div class="phase-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-header"><span class="step-num">1</span> Уточнение по рецепту</div>
+            <div class="step-body">
+              <div class="dialogue">
+                <div class="msg client">
+                  <div class="msg-label">Клиент</div>
+                  «Хочу заказать очки у вас».
+                </div>
+                <div class="msg consultant">
+                  <div class="msg-label">Консультант</div>
+                  «Отличный выбор, с радостью помогу определиться с формой и линзами! Подскажите, пожалуйста, у вас уже есть готовый рецепт на руках, или нужно будет проверить зрение у нас в салоне?»
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-header"><span class="step-num">2</span> Определение формата визита</div>
+            <div class="step-body">
+              <div class="scenarios" style="gap:12px;">
+                <div class="scenario">
+                  <div class="scenario-header"><span class="scenario-label">Рецепта нет</span></div>
+                  <div class="scenario-body">
+                    <div class="msg consultant">
+                      <div class="msg-label">Консультант</div>
+                      «Поняла вас. В таком случае перед подбором оправы лучше пройти диагностику у нашего врача-оптометриста. Это займёт около 20 минут, зато очки будут идеальными для глаз. Вы планируете приехать к нам в салон лично?»
+                    </div>
+                  </div>
+                </div>
+                <div class="scenario">
+                  <div class="scenario-header"><span class="scenario-label">Рецепт есть</span></div>
+                  <div class="scenario-body">
+                    <div class="msg consultant">
+                      <div class="msg-label">Консультант</div>
+                      «Супер! Подскажите, рецепт свежий (до полугода) или выписывали давно? И планируете ли вы приехать в салон на примерку оправ, или хотите оформить заказ онлайн?»
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Этап 3 · Маршрутизация и закрытие на целевое действие</div>
+      <div class="phase-goal">В онлайне «закрытие» должно сопровождаться кнопками, ссылками на онлайн-запись или конкретными тайм-слотами.</div>
+      <div class="phase-body">
+        <div class="scenarios">
+
+          <div class="scenario">
+            <div class="scenario-header"><span class="scenario-label">Сценарий А</span>&nbsp; Рецепт есть + Личный визит → Бронь времени</div>
+            <div class="scenario-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Прекрасно! Раз рецепт готов, мы ждём вас на примерку. У нас как раз обновился ассортимент оправ. Чтобы вам не пришлось ждать в очереди, я могу забронировать за вами личное время консультанта.<br>В какой салон вам удобнее подъехать: [Адрес 1] или [Адрес 2]? И какой день рассмотреть — будни или выходные?»
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario">
+            <div class="scenario-header"><span class="scenario-label">Сценарий Б</span>&nbsp; Рецепта нет + Личный визит → Запись к врачу</div>
+            <div class="scenario-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Тогда давайте начнём с самого важного — точного рецепта. Наш врач принимает по предварительной записи, чтобы вам не пришлось сидеть в очереди.<br>Могу предложить вам ближайшие слоты на завтра: <strong>12:00</strong> или <strong>16:30</strong>. Какое время вам забронировать?<br><em class="note">(Или: «Вы можете выбрать удобное время сами по этой ссылке: [Ссылка на онлайн-запись]»)</em>»
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario">
+            <div class="scenario-header"><span class="scenario-label">Сценарий В</span>&nbsp; Покупка товара онлайн → Дистанционный заказ</div>
+            <div class="scenario-body">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                «Принято! Ехать в салон не обязательно, мы можем оформить всё онлайн и отправить курьером/СДЭКом.<br>Пришлите, пожалуйста, фото вашего рецепта или напишите параметры ваших линз (диоптрии, радиус кривизны, бренд). Я прямо сейчас проверю их наличие на складе и рассчитаю стоимость ✨»
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-block">
+      <h4>🛠 Шаблоны на «сложные» моменты</h4>
+      <ul>
+        <li>
+          <strong>Клиент прислал фото старого/неразборчивого рецепта:</strong><br>
+          «Вижу ваш рецепт, спасибо! Подскажите, а как давно вы его выписывали? Если прошло больше года, параметры могли немного измениться. Чтобы новые очки не вызывали усталость глаз, я очень рекомендую обновить рецепт у нашего врача. Записать вас на диагностику перед подбором оправы?»
+        </li>
+        <li style="margin-top:10px;">
+          <strong>Клиент уходит от ответа и спрашивает только цену:</strong><br>
+          «Цена зависит от параметров ваших линз и выбранной оправы (у нас есть варианты от [Цена] до [Цена] рублей). Чтобы я не гадала, а назвала вам точную сумму под ваш бюджет, подскажите: у вас есть рецепт или нужно будет проверить зрение?»
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
