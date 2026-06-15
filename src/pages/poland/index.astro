@@ -14,7 +14,7 @@ import { t } from './_i18n';
 const slug = 'poland';
 const LANGS = ['ru','ua','pl'] as const;
 ---
-<BaseLayout slug={slug}>
+<BaseLayout slug={slug} copy="all">
   <div class="page-header">
     <div class="page-header-inner">
       {LANGS.map((l) => (
@@ -46,7 +46,7 @@ const LANGS = ['ru','ua','pl'] as const;
 
     <ScriptLang>
       {LANGS.map((l) => (
-        <ScriptLangPanel lang={l}>
+        <ScriptLangPanel lang={l} idBase="poland">
           <div class="section">
             <div class="section-title">{t.scriptTitle[l]}</div>
             <div class="steps">

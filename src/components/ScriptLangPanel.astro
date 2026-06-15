@@ -1,5 +1,9 @@
 ---
-interface Props { lang: 'ru' | 'ua' | 'pl'; }
-const { lang } = Astro.props;
+// One language panel inside a <ScriptLang> group. The id ends in -ru/-ua/-pl so
+// copy.js detectLang() picks the right button label for auto-copy buttons on
+// .msg.consultant inside it. idBase keeps ids unique when a page has several
+// ScriptLang groups (e.g. prodazha-online has two).
+interface Props { lang: 'ru' | 'ua' | 'pl'; idBase?: string; }
+const { lang, idBase = 'sl' } = Astro.props;
 ---
-<div class="script-lang" data-lang={lang} style={lang === 'ru' ? 'display:block' : 'display:none'}><slot /></div>
+<div class="script-lang" id={`${idBase}-${lang}`} data-lang={lang} style={lang === 'ru' ? 'display:block' : 'display:none'}><slot /></div>

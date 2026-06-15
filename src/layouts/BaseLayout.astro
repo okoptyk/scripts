@@ -5,8 +5,12 @@ import Footer from '@/components/Footer.astro';
 import { link } from '@/config/link';
 import { navLabels, footerNote, titles } from '@/i18n/ui';
 
-interface Props { slug: string; } // 'index' for home, else stage slug
-const { slug } = Astro.props;
+interface Props {
+  slug: string;        // 'index' for home, else stage slug
+  copy?: string;       // value for body[data-copy] — enables copy.js auto-buttons
+                       // ('all' = whole page, or a CSS selector like '#tab-msg')
+}
+const { slug, copy } = Astro.props;
 
 const titleSet = titles[slug];
 const i18n = {
@@ -23,7 +27,7 @@ const i18n = {
   <title>{titleSet.ru}</title>
   <script is:inline set:html={`window.__I18N__=${JSON.stringify(i18n)};`}></script>
 </head>
-<body data-page={slug}>
+<body data-page={slug} data-copy={copy}>
   <Navbar active={slug} />
   <slot />
   <Footer />
