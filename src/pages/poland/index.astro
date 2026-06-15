@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lang from '@/components/Lang.astro';
+import MetaBlock from '@/components/MetaBlock.astro';
+import MetaItem from '@/components/MetaItem.astro';
+import InfoBox from '@/components/InfoBox.astro';
+import ScriptLang from '@/components/ScriptLang.astro';
+import ScriptLangPanel from '@/components/ScriptLangPanel.astro';
+import Step from '@/components/Step.astro';
+import TipBlock from '@/components/TipBlock.astro';
+import { link } from '@/config/link';
+import { t } from './_i18n';
+
+const slug = 'poland';
+const LANGS = ['ru','ua','pl'] as const;
+---
+<BaseLayout slug={slug}>
+  <div class="page-header">
+    <div class="page-header-inner">
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <h1>{t.headerTitle[l]}</h1>
+          <p>{t.headerSub[l]}</p>
+        </Lang>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <MetaBlock>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <MetaItem label={t.metaCkpLabel[l]} html={t.metaCkp[l]} />
+          <MetaItem label={t.metaPriceGlassesLabel[l]} html={t.metaPriceGlasses[l]} />
+          <MetaItem label={t.metaPriceConsultLabel[l]} html={t.metaPriceConsult[l]} />
+          <MetaItem label={t.metaAddressLabel[l]} html={t.metaAddress[l]} />
+          <MetaItem label={t.metaPhoneLabel[l]} html={t.metaPhone[l]} />
+          <MetaItem label={t.metaDeadlineLabel[l]} html={t.metaDeadline[l]} />
+        </Lang>
+      ))}
+    </MetaBlock>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><InfoBox html={t.intro[l]} /></Lang>
+    ))}
+
+    <ScriptLang>
+      {LANGS.map((l) => (
+        <ScriptLangPanel lang={l}>
+          <div class="section">
+            <div class="section-title">{t.scriptTitle[l]}</div>
+            <div class="steps">
+              <Step num={1} title={t.step1Title[l]} html={t.step1[l]} />
+              <Step num={2} title={t.step2Title[l]} html={t.step2[l]} />
+              <Step num={3} title={t.step3Title[l]} html={t.step3[l]} />
+            </div>
+          </div>
+        </ScriptLangPanel>
+      ))}
+    </ScriptLang>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><TipBlock html={t.tip[l]} /></Lang>
+    ))}
+
+    {LANGS.map((l) => (
+      <Lang lang={l}>
+        <div style="margin-top:32px; text-align:center;">
+          <a href={link('podtverzdenie')} style="display:inline-block; background:var(--primary); color:var(--black); text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; font-size:.95rem;">{t.nextBtn[l]}</a>
+        </div>
+      </Lang>
+    ))}
+  </div>
+</BaseLayout>
