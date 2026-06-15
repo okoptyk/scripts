@@ -3,38 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zapisy na wizytę · OkOptyk (PL)</title>
+<title>Запись на визит · OkOptyk</title>
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-page="poland" data-copy="all">
 
 <nav class="navbar">
   <div class="navbar-inner">
-    <a class="navbar-brand" href="index.html">👁 Скрипты <span>Еврооптика · OkOptyk</span></a>
+    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="navbar-logo" alt="OkOptyk"></a>
     <ul class="nav-links">
       <li><a href="index.html">Главная</a></li>
       <li><a href="kvалификация.html">Квалификация</a></li>
-      <li><a href="belarus.html">Запись BY</a></li>
-      <li><a href="poland.html" class="active">Запись PL</a></li>
+      <li><a href="poland.html" class="active">Запись</a></li>
       <li><a href="podtverzdenie.html">Подтверждение</a></li>
       <li><a href="kommunikaciya.html">В салоне</a></li>
       <li><a href="prodazha-online.html">Онлайн-продажи</a></li>
       <li><a href="gotovnost-zakaza.html">Готовность заказа</a></li>
+      <li><a href="povtornye-prodazhi.html">Повторные продажи</a></li>
     </ul>
+    <div class="navbar-lang" role="group" aria-label="Язык сайта">
+      <span class="lang-ic" aria-hidden="true">🌐</span>
+      <button type="button" class="site-lang-btn" data-lang="ru" onclick="setSiteLang('ru')">RU</button>
+      <button type="button" class="site-lang-btn" data-lang="ua" onclick="setSiteLang('ua')">UA</button>
+      <button type="button" class="site-lang-btn" data-lang="pl" onclick="setSiteLang('pl')">PL</button>
+    </div>
   </div>
 </nav>
 
 <div class="page-header">
-  <div class="page-header-inner">
-    <span class="badge">🇵🇱 Польша · Этап 2</span>
-    <h1>Zapisy na wizytę · OkOptyk</h1>
-    <p>Запись клиентов на комплексную проверку зрения. Скрипты на русском и украинском языках.</p>
+  <div class="page-header-inner" data-i18n="header">
+    <h1>Запись на визит</h1>
+    <p>Запись клиентов на комплексную проверку зрения</p>
   </div>
 </div>
 
 <div class="container">
 
-  <div class="meta-block">
+  <div class="meta-block" data-i18n="meta">
     <div class="meta-item">
       <span class="meta-label">ЦКП</span>
       <span class="meta-value">Дата и время согласованы, запись в АРМ зафиксирована</span>
@@ -61,14 +66,15 @@
     </div>
   </div>
 
-  <div class="info-box">
+  <div class="info-box" data-i18n="intro">
     <strong>Комплексная проверка зрения включает:</strong>
     компьютерную диагностику (близорукость, дальнозоркость, астигматизм) · осмотр глазного дна · проверку остроты зрения · заключение офтальмолога · при необходимости — рецепт и план лечения.
   </div>
 
   <div class="lang-tabs">
-    <button class="lang-btn active" onclick="switchLang('ru', this)">🇷🇺 Русский</button>
-    <button class="lang-btn" onclick="switchLang('ua', this)">🇺🇦 Українська</button>
+    <button class="lang-btn active" data-lang="ru" onclick="switchLang('ru', this)">🇷🇺 Русский</button>
+    <button class="lang-btn" data-lang="ua" onclick="switchLang('ua', this)">🇺🇦 Українська</button>
+    <button class="lang-btn" data-lang="pl" onclick="switchLang('pl', this)">🇵🇱 Polski</button>
   </div>
 
   <!-- ══════ РУССКИЙ ══════ -->
@@ -187,7 +193,65 @@
     </div>
   </div>
 
-  <div class="tip-block">
+  <!-- ══════ ПОЛЬСКИЙ ══════ -->
+  <div id="lang-pl" style="display:none;">
+    <div class="section">
+      <div class="section-title">📋 Skrypt rejestracji klienta na wizytę (język polski)</div>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-header"><span class="step-num">1</span> Powitanie i informacja o usłudze</div>
+          <div class="step-body">
+            <div class="msg consultant">
+              <div class="msg-label">Konsultant</div>
+              Dzień dobry! Dziękujemy za wybranie naszego salonu optycznego 💚<br><br>
+              <strong>Kompleksowe badanie wzroku obejmuje:</strong><br>
+              — komputerową diagnostykę (wykrycie krótkowzroczności, dalekowzroczności, astygmatyzmu);<br>
+              — badanie dna oka (ocena stanu siatkówki i naczyń krwionośnych oka);<br>
+              — sprawdzenie ostrości wzroku;<br>
+              — orzeczenie okulistyczne.<br><br>
+              W razie potrzeby lekarz wystawi receptę i opracuje plan leczenia.<br><br>
+              <strong>Koszt:</strong> 99 zł (przy zamówieniu okularów) lub 199 zł, jeśli potrzebna jest tylko konsultacja.<br><br>
+              Dostępne terminy:<br>
+              —<br>
+              —<br><br>
+              Czy odpowiada Państwu taki termin? 😊
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header"><span class="step-num">2</span> Pobranie danych pacjenta</div>
+          <div class="step-body">
+            <div class="msg consultant">
+              <div class="msg-label">Konsultant</div>
+              Świetnie. W celu potwierdzenia wizyty prosimy o podanie:<br><br>
+              — Nazwiska i imienia (łacinką)<br>
+              — Daty urodzenia<br>
+              — Kontaktowego numeru telefonu
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header"><span class="step-num">3</span> Potwierdzenie wizyty</div>
+          <div class="step-body">
+            <div class="msg consultant">
+              <div class="msg-label">Konsultant</div>
+              Dziękujemy, Państwa wizyta została potwierdzona na (data/godzina).<br><br>
+              Zapraszamy pod adres:<br>
+              📍 Jeleniogórska 1/3 (wejście boczne Aldi)<br><br>
+              Jeśli Państwa plany się zmienią, prosimy o wcześniejsze poinformowanie nas tutaj lub pod numerem:<br>
+              📲 +48 732 432 925
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-block" data-i18n="tip">
     <h4>💡 Важно после записи</h4>
     <ul>
       <li>Зафиксировать запись в системе АРМ и карточке CRM.</li>
@@ -197,7 +261,7 @@
   </div>
 
   <div style="margin-top:32px; text-align:center;">
-    <a href="podtverzdenie.html" style="display:inline-block; background:var(--primary); color:#fff; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; font-size:.95rem;">
+    <a href="podtverzdenie.html" style="display:inline-block; background:var(--primary); color:var(--black); text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; font-size:.95rem;" data-i18n="nextbtn">
       Следующий шаг: Подтверждение визита →
     </a>
   </div>
@@ -208,9 +272,13 @@
 function switchLang(lang, btn) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('lang-ru').style.display = lang === 'ru' ? 'block' : 'none';
-  document.getElementById('lang-ua').style.display = lang === 'ua' ? 'block' : 'none';
+  ['ru', 'ua', 'pl'].forEach(l => {
+    document.getElementById('lang-' + l).style.display = l === lang ? 'block' : 'none';
+  });
 }
 </script>
+
+<script src="js/i18n.js"></script>
+<script src="js/copy.js"></script>
 </body>
 </html>
