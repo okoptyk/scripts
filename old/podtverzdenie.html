@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подтверждение визита · Скрипты</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="podtv">
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html"><img src="images/logo.png" class="navbar-logo" alt="OkOptyk"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Главная</a></li>
+      <li><a href="kvалификация.html">Квалификация</a></li>
+      <li><a href="poland.html">Запись</a></li>
+      <li><a href="podtverzdenie.html" class="active">Подтверждение</a></li>
+      <li><a href="kommunikaciya.html">В салоне</a></li>
+      <li><a href="prodazha-online.html">Онлайн-продажи</a></li>
+      <li><a href="gotovnost-zakaza.html">Готовность заказа</a></li>
+      <li><a href="povtornye-prodazhi.html">Повторные продажи</a></li>
+    </ul>
+    <div class="navbar-lang" role="group" aria-label="Язык сайта">
+      <span class="lang-ic" aria-hidden="true">🌐</span>
+      <button type="button" class="site-lang-btn" data-lang="ru" onclick="setSiteLang('ru')">RU</button>
+      <button type="button" class="site-lang-btn" data-lang="ua" onclick="setSiteLang('ua')">UA</button>
+      <button type="button" class="site-lang-btn" data-lang="pl" onclick="setSiteLang('pl')">PL</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner" data-i18n="header">
+    <h1>Подтверждение визита</h1>
+    <p>Напоминаем клиенту о записи, уточняем детали и оперативно переносим при необходимости</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="meta-block" data-i18n="meta">
+    <div class="meta-item">
+      <span class="meta-label">ЦКП</span>
+      <span class="meta-value">Клиент подтвердил визит (или перенос согласован)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Стартовая точка</span>
+      <span class="meta-value">Дата и время согласованы, запись зафиксирована</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Дедлайн</span>
+      <span class="meta-value">1 рабочий день</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Ответственный</span>
+      <span class="meta-value">Продавец-консультант, Менеджер</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('msg', this)" data-i18n="tab-msg">💬 Мессенджер</button>
+    <button class="tab-btn" onclick="switchTab('call', this)" data-i18n="tab-call">📞 Звонок</button>
+  </div>
+
+  <!-- ══════ МЕССЕНДЖЕР ══════ -->
+  <div class="tab-panel active" id="tab-msg">
+
+    <div class="section">
+      <div class="section-title" data-i18n="sttl-msg">💬 Шаблон сообщения подтверждения</div>
+
+      <div class="info-box" data-i18n="intro-msg">
+        Отправляется за <strong>1 день до визита</strong>. Сообщение должно содержать все детали, чтобы у клиента не возникало лишних вопросов.
+      </div>
+
+      <div class="lang-tabs">
+        <button class="lang-btn active" data-lang="ru" onclick="switchLangPod('ru', this)">🇷🇺 Русский</button>
+        <button class="lang-btn" data-lang="ua" onclick="switchLangPod('ua', this)">🇺🇦 Українська</button>
+        <button class="lang-btn" data-lang="pl" onclick="switchLangPod('pl', this)">🇵🇱 Polski</button>
+      </div>
+
+      <div id="pod-ru">
+        <div style="position:relative;">
+          <div class="template-box" id="tmpl-confirm-ru">Добрый день, [Имя клиента]! ✨
+
+Напоминаем, что вы записаны в оптику [Название] на завтра, [Дата] в [Время].
+
+📍 Наш адрес: Jeleniogórska 1/3 (напротив Aldi)
+👁 Услуга: Диагностика зрения и подбор очков
+🎒 Что взять с собой: Старые очки или прошлый рецепт (при наличии)
+
+Подскажите, пожалуйста, всё ли в силе, ваши планы не изменились? Удобно будет подойти?</div>
+          <button class="copy-btn" onclick="copyText('tmpl-confirm-ru', this)">Копировать</button>
+        </div>
+      </div>
+
+      <div id="pod-ua" style="display:none;">
+        <div style="position:relative;">
+          <div class="template-box" id="tmpl-confirm-ua">Доброго дня, [Ім'я клієнта]! ✨
+
+Нагадуємо, що ви записані в оптику [Назва] на завтра, [Дата] о [Час].
+
+📍 Наша адреса: Jeleniogórska 1/3 (вхід з боку Aldi)
+👁 Послуга: Діагностика зору та підбір окулярів
+🎒 Що взяти з собою: Старі окуляри або попередній рецепт (за наявності)
+
+Підкажіть, будь ласка, все в силі, ваші плани не змінилися? Зручно буде прийти?</div>
+          <button class="copy-btn" onclick="copyText('tmpl-confirm-ua', this)">Копіювати</button>
+        </div>
+      </div>
+
+      <div id="pod-pl" style="display:none;">
+        <div style="position:relative;">
+          <div class="template-box" id="tmpl-confirm-pl">Dzień dobry, [Imię Klienta]! ✨
+
+Przypominamy, że są Państwo umówieni w salonie optycznym [Nazwa] na jutro, [Data] o [Godzina].
+
+📍 Nasz adres: Jeleniogórska 1/3 (wejście boczne Aldi)
+👁 Usługa: Badanie wzroku i dobór okularów
+🎒 Co zabrać ze sobą: Stare okulary lub poprzednią receptę (jeśli Państwo posiadają)
+
+Prosimy potwierdzić, czy plany się nie zmieniły? Czy mogą Państwo przyjść?</div>
+          <button class="copy-btn" onclick="copyText('tmpl-confirm-pl', this)">Kopiuj</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════ ЗВОНОК ══════ -->
+  <div class="tab-panel" id="tab-call">
+
+    <div class="section">
+      <div class="section-title" data-i18n="sttl-call">📞 Скрипт подтверждения визита по телефону</div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-header"><span class="step-num">1</span> Звонок клиенту</div>
+          <div class="step-body">
+            <div class="dialogue">
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                Добрый день, <strong>[Имя клиента]</strong>! Меня зовут <strong>[Имя]</strong>, салон оптики <strong>[Название]</strong>
+              </div>
+              <div class="msg client">
+                <div class="msg-label">Клиент</div>
+                Да, что вы хотели?
+              </div>
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                <strong>[Имя]</strong>, звоню напомнить, что вы записаны к нам на завтра, <strong>[Дата]</strong>, к <strong>[Время]</strong> на диагностику зрения и подбор очков. Всё в силе, мы вас ждём?
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header"><span class="step-num">2А</span> Клиент подтверждает</div>
+          <div class="step-body">
+            <div class="dialogue">
+              <div class="msg client">
+                <div class="msg-label">Клиент</div>
+                Да, всё в силе.
+              </div>
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                Отлично! Напоминаю, что наш салон находится по адресу: <strong>[Адрес, ориентиры если нужно]</strong>. И не забудьте, пожалуйста, взять с собой старые очки или прошлый рецепт, если они есть у вас с собой. До встречи завтра!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-header"><span class="step-num">2Б</span> Клиент говорит, что не сможет прийти</div>
+          <div class="step-body">
+            <div class="dialogue">
+              <div class="msg client">
+                <div class="msg-label">Клиент</div>
+                Ой, я забыл, я не смогу…
+              </div>
+              <div class="msg consultant">
+                <div class="msg-label">Консультант</div>
+                Ничего страшного, хорошо, что созвонились! Давайте прямо сейчас перенесём запись на другой удобный день? Вам лучше подойдёт будний день или выходные?
+              </div>
+            </div>
+            <div class="info-box" style="margin-top:12px; margin-bottom:0;">
+              Не вешаем трубку — сразу возвращаемся на этап записи и фиксируем новое время.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tip-block" data-i18n="tip">
+    <h4>💡 После подтверждения</h4>
+    <ul>
+      <li>Перевести сделку в CRM на этап <strong>«Визит подтверждён»</strong>.</li>
+      <li>Если клиент не отвечает на звонок — отправить шаблон сообщения.</li>
+      <li>Если клиент перенёс — зафиксировать новое время в АРМ и снова перевести на этап «Визит запланирован».</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="container" style="padding-top:0;">
+  <div class="next-stage" data-i18n="next">
+    <div class="stage-path">
+      <span class="stage-done">Квалификация → Запись →</span>
+      <span class="stage-current"> Подтверждение</span>
+      <span> → В салоне → Готовность заказа</span>
+    </div>
+    <a class="next-stage-btn" href="kommunikaciya.html">Следующий шаг: В салоне →</a>
+  </div>
+</div>
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+function switchLangPod(lang, btn) {
+  document.querySelectorAll('.lang-btn[data-lang]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['ru', 'ua', 'pl'].forEach(l => {
+    document.getElementById('pod-' + l).style.display = l === lang ? 'block' : 'none';
+  });
+}
+function copyText(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+</script>
+
+<script src="js/i18n.js"></script>
+</body>
+</html>
