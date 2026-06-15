@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lang from '@/components/Lang.astro';
+import MetaBlock from '@/components/MetaBlock.astro';
+import MetaItem from '@/components/MetaItem.astro';
+import InfoBox from '@/components/InfoBox.astro';
+import Checklist from '@/components/Checklist.astro';
+import StagePath from '@/components/StagePath.astro';
+import { link } from '@/config/link';
+import { t } from './_i18n';
+
+const slug = 'kommunikaciya';
+const LANGS = ['ru','ua','pl'] as const;
+---
+<BaseLayout slug={slug}>
+  <div class="page-header">
+    <div class="page-header-inner">
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <h1>{t.headerTitle[l]}</h1>
+          <p>{t.headerSub[l]}</p>
+        </Lang>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <MetaBlock>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <MetaItem label={t.metaCkpLabel[l]} html={t.metaCkp[l]} />
+          <MetaItem label={t.metaStartLabel[l]} html={t.metaStart[l]} />
+          <MetaItem label={t.metaDeadlineLabel[l]} html={t.metaDeadline[l]} />
+          <MetaItem label={t.metaResponsibleLabel[l]} html={t.metaResponsible[l]} />
+        </Lang>
+      ))}
+    </MetaBlock>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><InfoBox html={t.intro[l]} /></Lang>
+    ))}
+
+    <div set:html={t.body} />
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><Checklist html={t.checklist[l]} /></Lang>
+    ))}
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><StagePath current={slug} lang={l} nextHref={link('gotovnost-zakaza')} nextLabel={t.nextBtn[l]} /></Lang>
+    ))}
+  </div>
+</BaseLayout>
