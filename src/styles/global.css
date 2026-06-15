@@ -39,6 +39,7 @@ body {
   background: var(--primary);
   color: var(--black);
   padding: 0 24px;
+  padding-top: env(safe-area-inset-top, 0px);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -494,7 +495,7 @@ li { margin-bottom: 4px; font-size: .92rem; }
   .navbar-inner {
     flex-wrap: wrap;
     gap: 6px 8px;
-    min-height: 0;
+    min-height: 44px;
     padding: 6px 0;
   }
   .navbar-brand { order: 1; }
@@ -520,3 +521,10 @@ html[data-site-lang="ua"] .lang-ua,
 html[data-site-lang="pl"] .lang-pl { display: revert; }
 /* default before JS runs: show RU */
 html:not([data-site-lang]) .lang-ru { display: revert; }
+
+/* ── PREVENT TOP-MARGIN LEAK ABOVE STICKY NAVBAR ───── */
+/* The first child of <body> after the navbar must not push a margin
+   outward, which would reveal the page background above the header. */
+.navbar { margin-top: 0; }
+.hero, .page-header { margin-top: 0; }
+.navbar + * { margin-top: 0; }
