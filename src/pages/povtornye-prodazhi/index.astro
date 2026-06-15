@@ -1,0 +1,116 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lang from '@/components/Lang.astro';
+import MetaBlock from '@/components/MetaBlock.astro';
+import MetaItem from '@/components/MetaItem.astro';
+import InfoBox from '@/components/InfoBox.astro';
+import Tabs from '@/components/Tabs.astro';
+import TabPanel from '@/components/TabPanel.astro';
+import Section from '@/components/Section.astro';
+import ScriptLang from '@/components/ScriptLang.astro';
+import ScriptLangPanel from '@/components/ScriptLangPanel.astro';
+import TemplateBox from '@/components/TemplateBox.astro';
+import TipBlock from '@/components/TipBlock.astro';
+import StagePath from '@/components/StagePath.astro';
+import { link } from '@/config/link';
+import { t } from './_i18n';
+
+const slug = 'povtornye-prodazhi';
+const LANGS = ['ru','ua','pl'] as const;
+---
+<BaseLayout slug={slug} copy="all">
+  <div class="page-header">
+    <div class="page-header-inner">
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <h1>{t.headerTitle[l]}</h1>
+          <p>{t.headerSub[l]}</p>
+        </Lang>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <MetaBlock>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <MetaItem label={t.metaCkpLabel[l]} html={t.metaCkp[l]} />
+          <MetaItem label={t.metaStartLabel[l]} html={t.metaStart[l]} />
+          <MetaItem label={t.metaDeadlineLabel[l]} html={t.metaDeadline[l]} />
+          <MetaItem label={t.metaRespLabel[l]} html={t.metaResp[l]} />
+        </Lang>
+      ))}
+    </MetaBlock>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><InfoBox html={t.intro[l]} /></Lang>
+    ))}
+
+    <Tabs buttons={[{ id:'s1', label: t.tabS1.ru }, { id:'s2', label: t.tabS2.ru }, { id:'s3', label: t.tabS3.ru }]}>
+      <TabPanel id="s1" first>
+        {LANGS.map((l) => (
+          <Lang lang={l}><div class="phase-goal" set:html={t.goalS1[l]} /></Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="s1">
+              <div set:html={t.s1Body[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+
+        <Section>
+          {LANGS.map((l) => (
+            <Lang lang={l}>
+              <div class="section-title">{t.sttlLens[l]}</div>
+            </Lang>
+          ))}
+          {LANGS.map((l) => (
+            <Lang lang={l}><InfoBox html={t.introLens[l]} /></Lang>
+          ))}
+          <ScriptLang>
+            {LANGS.map((l) => (
+              <ScriptLangPanel lang={l} idBase="lens">
+                <TemplateBox id={`tmpl-lens-${l}`} copyLabel={t.copyLabel[l]} html={t.tmplLens[l]} />
+              </ScriptLangPanel>
+            ))}
+          </ScriptLang>
+        </Section>
+      </TabPanel>
+
+      <TabPanel id="s2">
+        {LANGS.map((l) => (
+          <Lang lang={l}><div class="phase-goal" set:html={t.goalS2[l]} /></Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="s2">
+              <div set:html={t.s2Body[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+
+      <TabPanel id="s3">
+        {LANGS.map((l) => (
+          <Lang lang={l}><div class="phase-goal" set:html={t.goalS3[l]} /></Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="s3">
+              <div set:html={t.s3Body[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+    </Tabs>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><TipBlock html={t.tip[l]} /></Lang>
+    ))}
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><StagePath current={slug} lang={l} nextHref={link('')} nextLabel={t.nextBtn[l]} /></Lang>
+    ))}
+  </div>
+</BaseLayout>
