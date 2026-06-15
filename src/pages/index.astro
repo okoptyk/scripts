@@ -1,4 +1,56 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lang from '@/components/Lang.astro';
+import NavCard from '@/components/NavCard.astro';
+import { stages } from '@/config/stages';
+import { t } from './index.i18n';
+
+const LANGS = ['ru','ua','pl'] as const;
 ---
-<BaseLayout slug="index"><div class="container"><p>hello</p></div></BaseLayout>
+<BaseLayout slug="index">
+  <div class="hero">
+    {LANGS.map((l) => (
+      <Lang lang={l}>
+        <h1>{t.heroH1[l]}</h1>
+        <p set:html={t.heroP[l]} />
+      </Lang>
+    ))}
+  </div>
+
+  <div class="container">
+    {LANGS.map((l) => (
+      <Lang lang={l}><div class="info-box" set:html={t.intro[l]} /></Lang>
+    ))}
+
+    <div style="text-align:center; margin:28px 0 8px; padding:20px; background:var(--primary); border-radius:12px;">
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <p style="font-family:Georgia,serif; font-size:1.15rem; font-weight:700; color:var(--black); letter-spacing:.02em; margin:0;">{t.slogan[l]}</p>
+        </Lang>
+      ))}
+    </div>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}>
+        <h2 style="font-size:1.2rem; color:var(--primary-dark); margin-bottom:8px;">{t.razdely[l]}</h2>
+        <p style="color:var(--text-muted); font-size:.9rem; margin-bottom:4px;">{t.subtitle[l]}</p>
+      </Lang>
+    ))}
+
+    {LANGS.map((l) => (
+      <Lang lang={l}>
+        <div class="card-grid">
+          {stages.map((s, i) => (
+            <NavCard slug={s.slug} title={t.cards[l][i].title} desc={t.cards[l][i].desc} icon={s.icon} />
+          ))}
+        </div>
+      </Lang>
+    ))}
+
+    {LANGS.map((l) => (
+      <Lang lang={l}>
+        <div style="margin-top:48px; padding:24px; background:var(--card-bg); border:1px solid var(--border); border-radius:14px;" set:html={t.principles[l]} />
+      </Lang>
+    ))}
+  </div>
+</BaseLayout>
