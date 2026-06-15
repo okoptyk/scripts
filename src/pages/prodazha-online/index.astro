@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lang from '@/components/Lang.astro';
+import Tabs from '@/components/Tabs.astro';
+import TabPanel from '@/components/TabPanel.astro';
+import ScriptLang from '@/components/ScriptLang.astro';
+import ScriptLangPanel from '@/components/ScriptLangPanel.astro';
+import TipBlock from '@/components/TipBlock.astro';
+import StagePath from '@/components/StagePath.astro';
+import { t } from './_i18n';
+
+const slug = 'prodazha-online';
+const LANGS = ['ru','ua','pl'] as const;
+---
+<BaseLayout slug={slug} copy="all">
+  <div class="page-header">
+    <div class="page-header-inner">
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <h1>{t.headerTitle[l]}</h1>
+          <p>{t.headerSub[l]}</p>
+        </Lang>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <Tabs buttons={[{ id:'main', label: t.tabMain.ru }, { id:'lost', label: t.tabLost.ru }]}>
+      <TabPanel id="main" first>
+        {LANGS.map((l) => (
+          <Lang lang={l}>
+            <div class="info-box" set:html={t.introMain[l]} />
+          </Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="main">
+              <div set:html={t.mainBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+
+      <TabPanel id="lost">
+        {LANGS.map((l) => (
+          <Lang lang={l}>
+            <div class="info-box" set:html={t.introLost[l]} />
+          </Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="lost">
+              <div set:html={t.lostBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+        {LANGS.map((l) => (
+          <Lang lang={l}><TipBlock html={t.tipLost[l]} /></Lang>
+        ))}
+      </TabPanel>
+    </Tabs>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><StagePath current={slug} lang={l} nextLabel={t.nextBtn[l]} /></Lang>
+    ))}
+  </div>
+</BaseLayout>
