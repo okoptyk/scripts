@@ -1,0 +1,22 @@
+---
+import { stages } from '@/config/stages';
+import { link } from '@/config/link';
+import { pathLabels } from '@/i18n/path-labels';
+import type { Lang } from '@/i18n/ui';
+interface Props { current: string; lang: Lang; nextHref?: string; nextLabel: string; }
+const { current, lang, nextLabel } = Astro.props;
+const idx = stages.findIndex((s) => s.slug === current);
+const lbl = pathLabels[lang];
+const done = stages.slice(0, idx).map((s) => lbl[s.slug]);
+const rest = stages.slice(idx + 1).map((s) => lbl[s.slug]);
+const next = idx + 1 < stages.length ? stages[idx + 1].slug : '';
+const nextHref = Astro.props.nextHref ?? (next ? link(next) : link(''));
+---
+<div class="next-stage" style="margin-top:40px;">
+  <div class="stage-path">
+    {done.length > 0 && <span class="stage-done">{done.join(' → ')} → </span>}
+    <span class="stage-current">{lbl[stages[idx].slug]}</span>
+    {rest.length > 0 && <span> → {rest.join(' → ')}</span>}
+  </div>
+  <a class="next-stage-btn" href={nextHref}>{nextLabel}</a>
+</div>

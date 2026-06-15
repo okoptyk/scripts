@@ -1,0 +1,23 @@
+---
+// NavCard.astro — home card. icon may be 'poland-svg' sentinel.
+import { link } from '@/config/link';
+interface Props { slug: string; title: string; desc: string; icon: string; }
+const { slug, title, desc, icon } = Astro.props;
+---
+<a class="nav-card" href={link(slug)}>
+  <div class="nav-card-icon">
+    {icon === 'poland-svg' ? (
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="6" width="30" height="27" rx="4" fill="#f3f7db" stroke="#8a9e09" stroke-width="2"/>
+        <rect x="3" y="12" width="30" height="4" fill="#8a9e09"/>
+        <rect x="10" y="2" width="3" height="8" rx="1.5" fill="#8a9e09"/>
+        <rect x="23" y="2" width="3" height="8" rx="1.5" fill="#8a9e09"/>
+        <rect x="9" y="20" width="5" height="5" rx="1" fill="#AFCA0B" opacity=".7"/>
+        <rect x="16" y="20" width="5" height="5" rx="1" fill="#AFCA0B" opacity=".7"/>
+        <rect x="23" y="20" width="5" height="5" rx="1" fill="#AFCA0B" opacity=".7"/>
+      </svg>
+    ) : icon}
+  </div>
+  <div class="nav-card-title">{title}</div>
+  <div class="nav-card-desc">{desc}</div>
+</a>

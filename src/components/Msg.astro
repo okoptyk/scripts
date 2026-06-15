@@ -1,0 +1,5 @@
+---
+interface Props { role: 'consultant' | 'client'; label: string; }
+const { role, label } = Astro.props;
+---
+<div class={`msg ${role}`}><div class="msg-label">{label}</div><slot /></div>

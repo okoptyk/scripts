@@ -1,0 +1,13 @@
+---
+// Usage: <Tabs buttons={[{id:'msg',label:'💬 Мессенджер'},...]}><panels/></Tabs>
+interface Props { buttons: { id: string; label: string }[]; }
+const { buttons } = Astro.props;
+---
+<div class="tab-group">
+  <div class="tabs">
+    {buttons.map((b, i) => (
+      <button class={`tab-btn ${i === 0 ? 'active' : ''}`} data-tab={b.id}>{b.label}</button>
+    ))}
+  </div>
+  <slot />
+</div>

@@ -1,0 +1,9 @@
+---
+interface Props { title: string; goal?: string; }
+const { title, goal } = Astro.props;
+---
+<div class="phase">
+  <div class="phase-title">{title}</div>
+  {goal && <div class="phase-goal" set:html={goal} />}
+  <div class="phase-body"><slot /></div>
+</div>

@@ -1,0 +1,8 @@
+---
+interface Props { title: string; label?: string; html?: string; }
+const { title, label, html } = Astro.props;
+---
+<div class="scenario">
+  <div class="scenario-header">{label && <span class="scenario-label">{label}</span>} {title}</div>
+  {html != null ? <div class="scenario-body" set:html={html} /> : <div class="scenario-body"><slot /></div>}
+</div>

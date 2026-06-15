@@ -1,0 +1,5 @@
+---
+interface Props { lang: 'ru' | 'ua' | 'pl'; }
+const { lang } = Astro.props;
+---
+<div class="script-lang" data-lang={lang} style={lang === 'ru' ? 'display:block' : 'display:none'}><slot /></div>

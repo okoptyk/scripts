@@ -1,0 +1,10 @@
+---
+interface Props { id: string; copyLabel: string; html?: string; }
+const { id, copyLabel, html } = Astro.props;
+---
+<div style="position:relative;">
+  {html != null
+    ? <div class="template-box" id={id} set:html={html} />
+    : <div class="template-box" id={id}><slot /></div>}
+  <button class="copy-btn" data-copy-target={id} data-label={copyLabel}>{copyLabel}</button>
+</div>

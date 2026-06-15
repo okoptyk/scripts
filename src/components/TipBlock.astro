@@ -1,0 +1,5 @@
+---
+interface Props { html?: string; }
+const { html } = Astro.props;
+---
+{html != null ? <div class="tip-block" set:html={html} /> : <div class="tip-block"><slot /></div>}
