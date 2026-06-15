@@ -1,0 +1,7 @@
+---
+// Renders its slot only for the given site language (toggled client-side).
+interface Props { lang: 'ru' | 'ua' | 'pl'; tag?: string; class?: string; }
+const { lang, tag = 'div', class: cls = '' } = Astro.props;
+const Tag = tag as any;
+---
+<Tag class={`lang lang-${lang} ${cls}`.trim()}><slot /></Tag>

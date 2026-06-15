@@ -1,0 +1,34 @@
+---
+import '@/styles/global.css';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+import { link } from '@/config/link';
+import { navLabels, footerNote, titles } from '@/i18n/ui';
+
+interface Props { slug: string; } // 'index' for home, else stage slug
+const { slug } = Astro.props;
+
+const titleSet = titles[slug];
+const i18n = {
+  nav: navLabels,
+  footer: footerNote,
+  titles: titleSet,
+};
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{titleSet.ru}</title>
+  <script is:inline set:html={`window.__I18N__=${JSON.stringify(i18n)};`}></script>
+</head>
+<body data-page={slug}>
+  <Navbar active={slug} />
+  <slot />
+  <Footer />
+  <script is:inline src={link('scripts/site-lang.js')}></script>
+  <script is:inline src={link('scripts/ui.js')}></script>
+  <script is:inline src={link('scripts/copy.js')}></script>
+</body>
+</html>

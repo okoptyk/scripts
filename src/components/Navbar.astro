@@ -1,0 +1,25 @@
+---
+import { stages } from '@/config/stages';
+import { link } from '@/config/link';
+import SiteLangSwitcher from './SiteLangSwitcher.astro';
+interface Props { active: string; } // slug of current page, or 'index'
+const { active } = Astro.props;
+---
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href={link('')}><img src={link('images/logo.png')} class="navbar-logo" alt="OkOptyk"></a>
+    <ul class="nav-links">
+      <li>
+        <a href={link('')} data-slug="index" data-ru="Главная"
+           class={active === 'index' ? 'active' : ''}>Главная</a>
+      </li>
+      {stages.map((s) => (
+        <li>
+          <a href={link(s.slug)} data-slug={s.slug} data-ru={s.navLabel}
+             class={active === s.slug ? 'active' : ''}>{s.navLabel}</a>
+        </li>
+      ))}
+    </ul>
+    <SiteLangSwitcher />
+  </div>
+</nav>
