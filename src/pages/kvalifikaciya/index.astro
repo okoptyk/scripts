@@ -14,7 +14,7 @@ import { t } from './_i18n';
 const slug = 'kvalifikaciya';
 const LANGS = ['ru','ua','pl'] as const;
 ---
-<BaseLayout slug={slug} copy="[data-tab='messenger']">
+<BaseLayout slug={slug} copy=".tab-panel[data-tab='messenger']">
   <div class="page-header">
     <div class="page-header-inner">
       {LANGS.map((l) => (
