@@ -13,6 +13,7 @@ export const navLabels: Record<'ua' | 'pl', Record<string, string>> = {
     'prodazha-online': 'Онлайн-продажі',
     'gotovnost-zakaza': 'Готовність замовлення',
     'povtornye-prodazhi': 'Повторні продажі',
+    reaktivaciya: 'Реактивація',
   },
   pl: {
     index: 'Strona główna',
@@ -23,6 +24,7 @@ export const navLabels: Record<'ua' | 'pl', Record<string, string>> = {
     'prodazha-online': 'Sprzedaż online',
     'gotovnost-zakaza': 'Gotowość zamówienia',
     'povtornye-prodazhi': 'Sprzedaż ponowna',
+    reaktivaciya: 'Reaktywacja',
   },
 };
 
@@ -42,4 +44,5 @@ export const titles: Record<string, Record<Lang, string>> = {
   'prodazha-online':   { ru: 'Продажа очков онлайн · Скрипты', ua: 'Продаж окулярів онлайн · Скрипти', pl: 'Sprzedaż okularów online · Skrypty' },
   'gotovnost-zakaza':  { ru: 'Готовность заказа · Скрипты', ua: 'Готовність замовлення · Скрипти', pl: 'Gotowość zamówienia · Skrypty' },
   'povtornye-prodazhi':{ ru: 'Повторные продажи · Скрипты', ua: 'Повторні продажі · Скрипти', pl: 'Sprzedaż ponowna · Skrypty' },
+  reaktivaciya:        { ru: 'Реактивация · Скрипты', ua: 'Реактивація · Скрипти', pl: 'Reaktywacja · Skrypty' },
 };

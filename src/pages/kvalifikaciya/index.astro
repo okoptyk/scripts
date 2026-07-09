@@ -14,7 +14,7 @@ import { t } from './_i18n';
 const slug = 'kvalifikaciya';
 const LANGS = ['ru','ua','pl'] as const;
 ---
-<BaseLayout slug={slug} copy=".tab-panel[data-tab='messenger']">
+<BaseLayout slug={slug} copy=".tab-panel[data-tab='messenger'], .tab-panel[data-tab='proverka']">
   <div class="page-header">
     <div class="page-header-inner">
       {LANGS.map((l) => (
@@ -38,7 +38,7 @@ const LANGS = ['ru','ua','pl'] as const;
       ))}
     </MetaBlock>
 
-    <Tabs buttons={[{ id:'messenger', label: t.tabMsg.ru }, { id:'phone', label: t.tabPhone.ru }]}>
+    <Tabs buttons={[{ id:'messenger', label: t.tabMsg.ru }, { id:'phone', label: t.tabPhone.ru }, { id:'proverka', label: t.tabProverka.ru }]}>
       <TabPanel id="messenger" first>
         {LANGS.map((l) => (
           <Lang lang={l}><InfoBox html={t.rules[l]} /></Lang>
@@ -54,6 +54,16 @@ const LANGS = ['ru','ua','pl'] as const;
 
       <TabPanel id="phone">
         <div set:html={t.phoneBody} />
+      </TabPanel>
+
+      <TabPanel id="proverka">
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="proverka">
+              <div set:html={t.proverkaBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
       </TabPanel>
     </Tabs>
 

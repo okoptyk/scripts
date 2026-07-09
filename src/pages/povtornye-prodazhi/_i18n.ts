@@ -148,5 +148,5 @@ export const t = {
     pl: `<h4>💡 Wskazówki dla menedżera (jak zwiększyć konwersję)</h4><ul><li><strong>Prowadź CRM.</strong> Jeśli klient przy pierwszym zakupie wspomniał, że lubi wędkarstwo, pracuje w IT lub często jeździ nocą — zapisz to. Skrypt «Wspominał Pan, że często jeździ nocą, mamy świetne soczewki antyrefleksyjne…» działa 3 razy lepiej niż ogólny szablon.</li><li style="margin-top:10px;"><strong>Dawaj wartość, nie sprzedawaj.</strong> Klient nie chce kupować nowych okularów ot tak. Ale chce «zdjąć zmęczenie z oczu», «bezpiecznie prowadzić we mgle» lub «wyglądać stylowo na letnich zdjęciach».</li></ul>`,
   } as T,
 
-  nextBtn: { ru: '← Вернуться на главную', ua: '← Повернутися на головну', pl: '← Powrót na stronę główną' } as T,
+  nextBtn: { ru: 'Следующий шаг: Реактивация →', ua: 'Наступний крок: Реактивація →', pl: 'Następny krok: Reaktywacja →' } as T,
 };

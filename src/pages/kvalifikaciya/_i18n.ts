@@ -17,6 +17,7 @@ export const t = {
 
   tabMsg:   { ru: '💬 Мессенджер', ua: '💬 Месенджер', pl: '💬 Komunikator' } as T,
   tabPhone: { ru: '📞 Звонок', ua: '📞 Дзвінок', pl: '📞 Telefon' } as T,
+  tabProverka: { ru: '👁 Проверка', ua: '👁 Перевірка', pl: '👁 Badanie' } as T,
 
   rules: {
     ru: `<strong>Главные правила онлайн-общения:</strong>
@@ -358,6 +359,163 @@ export const t = {
         <li><strong>Альтернативные вопросы.</strong> Всегда завершайте предложение записи выбором без выбора: «Вам удобно в 14:00 или в 18:30?», «Будни или выходные?» — это подталкивает клиента к принятию решения.</li>
       </ul>
     </div>`,
+
+  // Вкладка «Проверка» — сценарий обработки заявки «Хочу записаться на проверку зрения».
+  proverkaBody: {
+    ru: `<div class="phase">
+        <div class="phase-title">Сценарий обработки заявки «Хочу записаться на проверку зрения»</div>
+        <div class="phase-goal">Цель: определить, что нужно клиенту — приём оптометриста (подбор очков) или консультация офтальмолога (жалобы, здоровье глаз), — и закрыть на запись.</div>
+        <div class="phase-body">
+          <div class="dialogue">
+            <div class="msg client"><div class="msg-label">Клиент</div>Хочу записаться на проверку зрения.</div>
+            <div class="msg consultant"><div class="msg-label">Консультант</div>Здравствуйте! Спасибо, что обратились в Ok.Optyk 😊<br><br>Подскажите, пожалуйста, вас интересует профилактическая проверка зрения и подбор очков или вас что-то беспокоит?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Альтернативные варианты ключевого вопроса</div>
+        <div class="phase-goal">Используйте любую формулировку — по ситуации и клиенту.</div>
+        <div class="phase-body">
+          <div class="msg consultant"><div class="msg-label">Консультант</div>Подскажите, пожалуйста, проверка зрения нужна для подбора очков или есть какие-либо жалобы на зрение?</div>
+          <div class="msg consultant" style="margin-top:10px;"><div class="msg-label">Консультант</div>Вас интересует проверка зрения для обновления рецепта на очки или необходима консультация офтальмолога?</div>
+          <div class="msg consultant" style="margin-top:10px;"><div class="msg-label">Консультант</div>Вам нужна проверка зрения для подбора очков или консультация врача по вопросам здоровья глаз?</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Если клиент не понимает разницу</div>
+        <div class="phase-goal">Спокойно объясняем, в чём отличие приёмов, и снова даём выбор.</div>
+        <div class="phase-body">
+          <div class="msg consultant"><div class="msg-label">Консультант</div>Объясняем 😊<br><br>Если вы хотите заказать очки и проверить зрение перед изготовлением — подойдёт приём у оптометриста.<br><br>Если есть жалобы, дискомфорт, воспаление или нужна консультация по лечению — рекомендуем приём офтальмолога.<br><br>Какой вариант подойдёт для вас?</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Маршрутизация и закрытие на запись</div>
+        <div class="phase-goal">По ответу клиента ведём его на нужный приём и сразу называем цену и время.</div>
+        <div class="phase-body">
+          <div class="scenarios">
+            <div class="scenario">
+              <div class="scenario-header"><span class="scenario-label">Оптометрист</span>&nbsp; Подбор / замена очков</div>
+              <div class="scenario-body">
+                <div class="msg client"><div class="msg-label">Клиент</div>«Мне нужны очки» · «Хочу проверить зрение и подобрать очки» · «Хочу заменить очки» · «Стал хуже видеть»</div>
+                <div class="msg consultant"><div class="msg-label">Консультант</div>В таком случае вам подойдёт приём у оптометриста.<br><br>Во время приёма специалист проверит ваше зрение и определит необходимые параметры коррекции.<br><br>Стоимость проверки зрения <strong>99 zł</strong>. При покупке очков в нашей оптике — <strong>бесплатно</strong>.<br><br>Доступное время приёма …</div>
+              </div>
+            </div>
+            <div class="scenario">
+              <div class="scenario-header"><span class="scenario-label">Офтальмолог</span>&nbsp; Жалобы / здоровье глаз</div>
+              <div class="scenario-body">
+                <div class="msg client"><div class="msg-label">Клиент</div>«У меня болят глаза» · «Есть воспаление» · «Хочу проверить здоровье глаз» · «Нужна консультация врача»</div>
+                <div class="msg consultant"><div class="msg-label">Консультант</div>В вашем случае рекомендую записаться на консультацию к офтальмологу, так как врач сможет провести комплексную диагностику, оценить состояние глаз и при необходимости назначить лечение.<br><br>Стоимость консультации офтальмолога — <strong>199 zł</strong>. При покупке очков — <strong>99 zł</strong>.<br><br>Можем предложить … для визита. Будет ли вам удобно?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`,
+    ua: `<div class="phase">
+        <div class="phase-title">Сценарій обробки заявки «Хочу записатися на перевірку зору»</div>
+        <div class="phase-goal">Мета: визначити, що потрібно клієнту — прийом оптометриста (підбір окулярів) чи консультація офтальмолога (скарги, здоров'я очей), — і закрити на запис.</div>
+        <div class="phase-body">
+          <div class="dialogue">
+            <div class="msg client"><div class="msg-label">Клієнт</div>Хочу записатися на перевірку зору.</div>
+            <div class="msg consultant"><div class="msg-label">Консультант</div>Вітаю! Дякуємо, що звернулися в Ok.Optyk 😊<br><br>Підкажіть, будь ласка, вас цікавить профілактична перевірка зору та підбір окулярів чи вас щось турбує?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Альтернативні варіанти ключового запитання</div>
+        <div class="phase-goal">Використовуйте будь-яке формулювання — за ситуацією та клієнтом.</div>
+        <div class="phase-body">
+          <div class="msg consultant"><div class="msg-label">Консультант</div>Підкажіть, будь ласка, перевірка зору потрібна для підбору окулярів чи є якісь скарги на зір?</div>
+          <div class="msg consultant" style="margin-top:10px;"><div class="msg-label">Консультант</div>Вас цікавить перевірка зору для оновлення рецепта на окуляри чи необхідна консультація офтальмолога?</div>
+          <div class="msg consultant" style="margin-top:10px;"><div class="msg-label">Консультант</div>Вам потрібна перевірка зору для підбору окулярів чи консультація лікаря щодо здоров'я очей?</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Якщо клієнт не розуміє різницю</div>
+        <div class="phase-goal">Спокійно пояснюємо відмінність прийомів і знову даємо вибір.</div>
+        <div class="phase-body">
+          <div class="msg consultant"><div class="msg-label">Консультант</div>Пояснюємо 😊<br><br>Якщо ви хочете замовити окуляри та перевірити зір перед виготовленням — підійде прийом у оптометриста.<br><br>Якщо є скарги, дискомфорт, запалення або потрібна консультація щодо лікування — рекомендуємо прийом офтальмолога.<br><br>Який варіант підійде для вас?</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Маршрутизація та закриття на запис</div>
+        <div class="phase-goal">За відповіддю клієнта ведемо його на потрібний прийом і одразу називаємо ціну та час.</div>
+        <div class="phase-body">
+          <div class="scenarios">
+            <div class="scenario">
+              <div class="scenario-header"><span class="scenario-label">Оптометрист</span>&nbsp; Підбір / заміна окулярів</div>
+              <div class="scenario-body">
+                <div class="msg client"><div class="msg-label">Клієнт</div>«Мені потрібні окуляри» · «Хочу перевірити зір і підібрати окуляри» · «Хочу замінити окуляри» · «Став гірше бачити»</div>
+                <div class="msg consultant"><div class="msg-label">Консультант</div>У такому разі вам підійде прийом у оптометриста.<br><br>Під час прийому спеціаліст перевірить ваш зір і визначить необхідні параметри корекції.<br><br>Вартість перевірки зору <strong>99 zł</strong>. При купівлі окулярів у нашій оптиці — <strong>безкоштовно</strong>.<br><br>Доступний час прийому …</div>
+              </div>
+            </div>
+            <div class="scenario">
+              <div class="scenario-header"><span class="scenario-label">Офтальмолог</span>&nbsp; Скарги / здоров'я очей</div>
+              <div class="scenario-body">
+                <div class="msg client"><div class="msg-label">Клієнт</div>«У мене болять очі» · «Є запалення» · «Хочу перевірити здоров'я очей» · «Потрібна консультація лікаря»</div>
+                <div class="msg consultant"><div class="msg-label">Консультант</div>У вашому випадку рекомендую записатися на консультацію до офтальмолога, оскільки лікар зможе провести комплексну діагностику, оцінити стан очей та за потреби призначити лікування.<br><br>Вартість консультації офтальмолога — <strong>199 zł</strong>. При купівлі окулярів — <strong>99 zł</strong>.<br><br>Можемо запропонувати … для візиту. Чи буде вам зручно?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`,
+    pl: `<div class="phase">
+        <div class="phase-title">Scenariusz obsługi zgłoszenia «Chcę zapisać się na badanie wzroku»</div>
+        <div class="phase-goal">Cel: ustalić, czego potrzebuje klient — wizyty u optometrysty (dobór okularów) czy konsultacji okulisty (dolegliwości, zdrowie oczu) — i zamknąć na rejestrację.</div>
+        <div class="phase-body">
+          <div class="dialogue">
+            <div class="msg client"><div class="msg-label">Klient</div>Chcę zapisać się na badanie wzroku.</div>
+            <div class="msg consultant"><div class="msg-label">Konsultant</div>Dzień dobry! Dziękujemy za kontakt z Ok.Optyk 😊<br><br>Proszę powiedzieć, czy interesuje Państwa profilaktyczne badanie wzroku i dobór okularów, czy coś Państwa niepokoi?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Alternatywne warianty kluczowego pytania</div>
+        <div class="phase-goal">Użyj dowolnego sformułowania — w zależności od sytuacji i klienta.</div>
+        <div class="phase-body">
+          <div class="msg consultant"><div class="msg-label">Konsultant</div>Proszę powiedzieć, czy badanie wzroku jest potrzebne do doboru okularów, czy występują jakieś dolegliwości ze wzrokiem?</div>
+          <div class="msg consultant" style="margin-top:10px;"><div class="msg-label">Konsultant</div>Czy interesuje Państwa badanie wzroku w celu aktualizacji recepty na okulary, czy potrzebna jest konsultacja okulisty?</div>
+          <div class="msg consultant" style="margin-top:10px;"><div class="msg-label">Konsultant</div>Czy potrzebują Państwo badania wzroku do doboru okularów, czy konsultacji lekarza w sprawie zdrowia oczu?</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Jeśli klient nie rozumie różnicy</div>
+        <div class="phase-goal">Spokojnie wyjaśniamy różnicę między wizytami i ponownie dajemy wybór.</div>
+        <div class="phase-body">
+          <div class="msg consultant"><div class="msg-label">Konsultant</div>Wyjaśniamy 😊<br><br>Jeśli chcą Państwo zamówić okulary i sprawdzić wzrok przed ich wykonaniem — odpowiednia będzie wizyta u optometrysty.<br><br>Jeśli występują dolegliwości, dyskomfort, stan zapalny lub potrzebna jest konsultacja dotycząca leczenia — polecamy wizytę u okulisty.<br><br>Który wariant będzie dla Państwa odpowiedni?</div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-title">Routing i zamknięcie na rejestrację</div>
+        <div class="phase-goal">Na podstawie odpowiedzi klienta kierujemy go na właściwą wizytę i od razu podajemy cenę oraz termin.</div>
+        <div class="phase-body">
+          <div class="scenarios">
+            <div class="scenario">
+              <div class="scenario-header"><span class="scenario-label">Optometrysta</span>&nbsp; Dobór / wymiana okularów</div>
+              <div class="scenario-body">
+                <div class="msg client"><div class="msg-label">Klient</div>«Potrzebuję okularów» · «Chcę sprawdzić wzrok i dobrać okulary» · «Chcę wymienić okulary» · «Zacząłem gorzej widzieć»</div>
+                <div class="msg consultant"><div class="msg-label">Konsultant</div>W takim razie odpowiednia będzie wizyta u optometrysty.<br><br>Podczas wizyty specjalista sprawdzi Państwa wzrok i ustali niezbędne parametry korekcji.<br><br>Koszt badania wzroku <strong>99 zł</strong>. Przy zakupie okularów w naszym salonie — <strong>bezpłatnie</strong>.<br><br>Dostępne terminy wizyty …</div>
+              </div>
+            </div>
+            <div class="scenario">
+              <div class="scenario-header"><span class="scenario-label">Okulista</span>&nbsp; Dolegliwości / zdrowie oczu</div>
+              <div class="scenario-body">
+                <div class="msg client"><div class="msg-label">Klient</div>«Bolą mnie oczy» · «Mam stan zapalny» · «Chcę sprawdzić zdrowie oczu» · «Potrzebuję konsultacji lekarza»</div>
+                <div class="msg consultant"><div class="msg-label">Konsultant</div>W Państwa przypadku polecam zapisać się na konsultację do okulisty, ponieważ lekarz przeprowadzi kompleksową diagnostykę, oceni stan oczu i w razie potrzeby zaleci leczenie.<br><br>Koszt konsultacji okulisty — <strong>199 zł</strong>. Przy zakupie okularów — <strong>99 zł</strong>.<br><br>Możemy zaproponować … na wizytę. Czy będzie to dla Państwa dogodne?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`,
+  } as T,
 
   nextBtn: { ru: 'Следующий шаг: Запись на визит →', ua: 'Наступний крок: Запис на візит →', pl: 'Następny krok: Rejestracja na wizytę →' } as T,
 };

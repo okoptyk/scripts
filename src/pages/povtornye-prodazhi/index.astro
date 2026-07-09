@@ -12,7 +12,6 @@ import ScriptLangPanel from '@/components/ScriptLangPanel.astro';
 import TemplateBox from '@/components/TemplateBox.astro';
 import TipBlock from '@/components/TipBlock.astro';
 import StagePath from '@/components/StagePath.astro';
-import { link } from '@/config/link';
 import { t } from './_i18n';
 
 const slug = 'povtornye-prodazhi';
@@ -110,7 +109,7 @@ const LANGS = ['ru','ua','pl'] as const;
     ))}
 
     {LANGS.map((l) => (
-      <Lang lang={l}><StagePath current={slug} lang={l} nextHref={link('')} nextLabel={t.nextBtn[l]} /></Lang>
+      <Lang lang={l}><StagePath current={slug} lang={l} nextLabel={t.nextBtn[l]} /></Lang>
     ))}
   </div>
 </BaseLayout>

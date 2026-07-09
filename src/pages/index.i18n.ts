@@ -45,6 +45,7 @@ export const t = {
       { title: 'Продажа очков онлайн', desc: 'Помогаем клиенту выбрать и оформить заказ дистанционно.' },
       { title: 'Уведомление о готовности заказа', desc: 'Сообщаем клиенту, что очки готовы, и согласовываем удобное время для визита.' },
       { title: 'Повторные продажи', desc: 'Заботимся о клиенте после покупки и реализуем потенциал повторной продажи.' },
+      { title: 'Реактивация', desc: 'Возвращаем «спящих» клиентов, которые ранее оставляли заявку на проверку зрения.' },
     ],
     ua: [
       { title: 'Кваліфікація клієнта', desc: 'Визначаємо потребу клієнта та спрямовуємо його правильним шляхом.' },
@@ -54,6 +55,7 @@ export const t = {
       { title: 'Продаж окулярів онлайн', desc: 'Допомагаємо клієнту обрати та оформити замовлення дистанційно.' },
       { title: 'Повідомлення про готовність замовлення', desc: 'Повідомляємо клієнту, що окуляри готові, та узгоджуємо зручний час для візиту.' },
       { title: 'Повторні продажі', desc: 'Дбаємо про клієнта після покупки та реалізуємо потенціал повторного продажу.' },
+      { title: 'Реактивація', desc: 'Повертаємо «сплячих» клієнтів, які раніше залишали заявку на перевірку зору.' },
     ],
     pl: [
       { title: 'Kwalifikacja klienta', desc: 'Ustalamy potrzebę klienta i kierujemy go właściwą ścieżką.' },
@@ -63,6 +65,7 @@ export const t = {
       { title: 'Sprzedaż okularów online', desc: 'Pomagamy klientowi wybrać i złożyć zamówienie zdalnie.' },
       { title: 'Powiadomienie o gotowości zamówienia', desc: 'Informujemy klienta, że okulary są gotowe, i ustalamy dogodny termin wizyty.' },
       { title: 'Sprzedaż ponowna', desc: 'Dbamy o klienta po zakupie i wykorzystujemy potencjał ponownej sprzedaży.' },
+      { title: 'Reaktywacja', desc: 'Odzyskujemy «uśpionych» klientów, którzy wcześniej zostawili zgłoszenie na badanie wzroku.' },
     ],
   } as CardsT,
 

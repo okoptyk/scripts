@@ -5,6 +5,7 @@
    области, указанной в body[data-copy]:
      data-copy="all"            — вся страница
      data-copy="#tab-messenger" — только указанный контейнер
+     (селектор может совпасть с несколькими контейнерами — кнопки добавятся во все)
    Подпись кнопки подбирается под язык блока скрипта (ru/ua/pl).
    Не зависит от переключателей языка скриптов и языка сайта.
    ============================================================ */
@@ -60,8 +61,9 @@
   function init() {
     var sel = document.body.getAttribute('data-copy');
     if (!sel) return;
-    var root = (sel === 'all') ? document : document.querySelector(sel);
-    addButtons(root);
+    if (sel === 'all') { addButtons(document); return; }
+    // Селектор может совпасть с несколькими контейнерами (несколько вкладок).
+    document.querySelectorAll(sel).forEach(addButtons);
   }
 
   if (document.readyState === 'loading') {

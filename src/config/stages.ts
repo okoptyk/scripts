@@ -69,4 +69,12 @@ export const stages: Stage[] = [
     icon: '🔁',
     pathLabel: 'Повторные продажи',
   },
+  {
+    slug: 'reaktivaciya',
+    navLabel: 'Реактивация',
+    cardTitle: 'Реактивация',
+    cardDesc: 'Возвращаем «спящих» клиентов, которые ранее оставляли заявку на проверку зрения.',
+    icon: '🔔',
+    pathLabel: 'Реактивация',
+  },
 ];
