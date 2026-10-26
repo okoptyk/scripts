@@ -34,13 +34,14 @@ export const t = {
     pl: 'Wybierz odpowiedni etap pracy z klientem:',
   } as T,
 
-  // Parallel to stages.ts order: kvalifikaciya, poland, podtverzdenie,
-  // kommunikaciya, prodazha-online, gotovnost-zakaza, povtornye-prodazhi
+  // Parallel to stages.ts order: novye-klienty, kvalifikaciya, poland, podtverzdenie,
+  // kommunikaciya, prodazha-online, gotovnost-zakaza, povtornye-prodazhi, reaktivaciya
   cards: {
     ru: [
+      { title: 'Новые клиенты', desc: 'Приветствуем нового подписчика, дарим промокод на 50 zł и переводим в запись.' },
       { title: 'Квалификация клиента', desc: 'Определяем потребность клиента и направляем его по правильному пути.' },
       { title: 'Запись на визит', desc: 'Согласовываем дату, время и адрес салона.' },
-      { title: 'Подтверждение визита', desc: 'Напоминаем клиенту о записи, уточняем детали и оперативно переносим при необходимости.' },
+      { title: 'Напоминание о визите', desc: 'Напоминаем клиенту о записи, уточняем детали и оперативно переносим при необходимости.' },
       { title: 'Первичная коммуникация в салоне', desc: 'Встречаем клиента, выявляем потребность и направляем к нужному сценарию обслуживания.' },
       { title: 'Продажа очков онлайн', desc: 'Помогаем клиенту выбрать и оформить заказ дистанционно.' },
       { title: 'Уведомление о готовности заказа', desc: 'Сообщаем клиенту, что очки готовы, и согласовываем удобное время для визита.' },
@@ -48,9 +49,10 @@ export const t = {
       { title: 'Реактивация', desc: 'Возвращаем «спящих» клиентов, которые ранее оставляли заявку на проверку зрения.' },
     ],
     ua: [
+      { title: 'Нові клієнти', desc: 'Вітаємо нового підписника, даруємо промокод на 50 zł і переводимо в запис.' },
       { title: 'Кваліфікація клієнта', desc: 'Визначаємо потребу клієнта та спрямовуємо його правильним шляхом.' },
       { title: 'Запис на візит', desc: 'Узгоджуємо дату, час та адресу салону.' },
-      { title: 'Підтвердження візиту', desc: 'Нагадуємо клієнту про запис, уточнюємо деталі та оперативно переносимо за потреби.' },
+      { title: 'Нагадування про візит', desc: 'Нагадуємо клієнту про запис, уточнюємо деталі та оперативно переносимо за потреби.' },
       { title: 'Первинна комунікація в салоні', desc: 'Зустрічаємо клієнта, виявляємо потребу та спрямовуємо до потрібного сценарію обслуговування.' },
       { title: 'Продаж окулярів онлайн', desc: 'Допомагаємо клієнту обрати та оформити замовлення дистанційно.' },
       { title: 'Повідомлення про готовність замовлення', desc: 'Повідомляємо клієнту, що окуляри готові, та узгоджуємо зручний час для візиту.' },
@@ -58,9 +60,10 @@ export const t = {
       { title: 'Реактивація', desc: 'Повертаємо «сплячих» клієнтів, які раніше залишали заявку на перевірку зору.' },
     ],
     pl: [
+      { title: 'Nowi klienci', desc: 'Witamy nowego subskrybenta, dajemy kod rabatowy 50 zł i prowadzimy do rejestracji.' },
       { title: 'Kwalifikacja klienta', desc: 'Ustalamy potrzebę klienta i kierujemy go właściwą ścieżką.' },
       { title: 'Rejestracja na wizytę', desc: 'Ustalamy datę, godzinę i adres salonu.' },
-      { title: 'Potwierdzenie wizyty', desc: 'Przypominamy klientowi o wizycie, doprecyzowujemy szczegóły i w razie potrzeby szybko przekładamy.' },
+      { title: 'Przypomnienie o wizycie', desc: 'Przypominamy klientowi o wizycie, doprecyzowujemy szczegóły i w razie potrzeby szybko przekładamy.' },
       { title: 'Pierwszy kontakt w salonie', desc: 'Witamy klienta, ustalamy potrzebę i kierujemy do właściwego scenariusza obsługi.' },
       { title: 'Sprzedaż okularów online', desc: 'Pomagamy klientowi wybrać i złożyć zamówienie zdalnie.' },
       { title: 'Powiadomienie o gotowości zamówienia', desc: 'Informujemy klienta, że okulary są gotowe, i ustalamy dogodny termin wizyty.' },

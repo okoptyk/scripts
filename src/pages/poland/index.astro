@@ -40,19 +40,15 @@ const LANGS = ['ru','ua','pl'] as const;
       ))}
     </MetaBlock>
 
-    {LANGS.map((l) => (
-      <Lang lang={l}><InfoBox html={t.intro[l]} /></Lang>
-    ))}
-
     <ScriptLang>
       {LANGS.map((l) => (
         <ScriptLangPanel lang={l} idBase="poland">
           <div class="section">
             <div class="section-title">{t.scriptTitle[l]}</div>
             <div class="steps">
-              <Step num={1} title={t.step1Title[l]} html={t.step1[l]} />
-              <Step num={2} title={t.step2Title[l]} html={t.step2[l]} />
-              <Step num={3} title={t.step3Title[l]} html={t.step3[l]} />
+              
+              <Step num={1} title={t.step2Title[l]} html={t.step2[l]} />
+              <Step num={2} title={t.step3Title[l]} html={t.step3[l]} />
             </div>
           </div>
         </ScriptLangPanel>

@@ -14,7 +14,7 @@ import { t } from './_i18n';
 const slug = 'kvalifikaciya';
 const LANGS = ['ru','ua','pl'] as const;
 ---
-<BaseLayout slug={slug} copy=".tab-panel[data-tab='messenger'], .tab-panel[data-tab='proverka']">
+<BaseLayout slug={slug} copy=".tab-panel[data-tab='start'], .tab-panel[data-tab='opto'], .tab-panel[data-tab='oftal']">
   <div class="page-header">
     <div class="page-header-inner">
       {LANGS.map((l) => (
@@ -38,29 +38,45 @@ const LANGS = ['ru','ua','pl'] as const;
       ))}
     </MetaBlock>
 
-    <Tabs buttons={[{ id:'messenger', label: t.tabMsg.ru }, { id:'phone', label: t.tabPhone.ru }, { id:'proverka', label: t.tabProverka.ru }]}>
-      <TabPanel id="messenger" first>
-        {LANGS.map((l) => (
-          <Lang lang={l}><InfoBox html={t.rules[l]} /></Lang>
-        ))}
+    <Tabs buttons={[{ id:'opto', label: t.tabOpto.ru }, { id:'oftal', label: t.tabOftal.ru }, { id:'start', label: t.tabStart.ru }, { id:'phone', label: t.tabPhone.ru }]}>
+      <TabPanel id="phone">
         <ScriptLang>
           {LANGS.map((l) => (
-            <ScriptLangPanel lang={l} idBase="msg">
-              <div set:html={t.msgBody[l]} />
+            <ScriptLangPanel lang={l} idBase="phone">
+              <div set:html={t.phoneBody[l]} />
             </ScriptLangPanel>
           ))}
         </ScriptLang>
       </TabPanel>
 
-      <TabPanel id="phone">
-        <div set:html={t.phoneBody} />
-      </TabPanel>
-
-      <TabPanel id="proverka">
+      <TabPanel id="start">
+        {LANGS.map((l) => (
+          <Lang lang={l}><InfoBox html={t.rules[l]} /></Lang>
+        ))}
         <ScriptLang>
           {LANGS.map((l) => (
-            <ScriptLangPanel lang={l} idBase="proverka">
-              <div set:html={t.proverkaBody[l]} />
+            <ScriptLangPanel lang={l} idBase="start">
+              <div set:html={t.startBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+
+      <TabPanel id="opto" first>
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="opto">
+              <div set:html={t.optoBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+
+      <TabPanel id="oftal">
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="oftal">
+              <div set:html={t.oftalBody[l]} />
             </ScriptLangPanel>
           ))}
         </ScriptLang>

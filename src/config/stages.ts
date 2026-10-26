@@ -14,6 +14,14 @@ export interface Stage {
 
 export const stages: Stage[] = [
   {
+    slug: 'novye-klienty',
+    navLabel: 'Новые клиенты',
+    cardTitle: 'Новые клиенты',
+    cardDesc: 'Приветствуем нового подписчика, дарим промокод на 50 zł и переводим в запись.',
+    icon: '🎁',
+    pathLabel: 'Новые клиенты',
+  },
+  {
     slug: 'kvalifikaciya',
     navLabel: 'Квалификация',
     cardTitle: 'Квалификация клиента',
@@ -31,11 +39,11 @@ export const stages: Stage[] = [
   },
   {
     slug: 'podtverzdenie',
-    navLabel: 'Подтверждение',
-    cardTitle: 'Подтверждение визита',
+    navLabel: 'Напоминание',
+    cardTitle: 'Напоминание о визите',
     cardDesc: 'Напоминаем клиенту о записи, уточняем детали и оперативно переносим при необходимости.',
     icon: '✅',
-    pathLabel: 'Подтверждение',
+    pathLabel: 'Напоминание',
   },
   {
     slug: 'kommunikaciya',

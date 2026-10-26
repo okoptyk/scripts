@@ -8,10 +8,10 @@ export const t = {
 
   metaCkpLabel:   { ru: 'ЦКП', ua: 'ЦКП', pl: 'Cel etapu' } as T,
   metaCkp:        { ru: 'Дата и время согласованы, запись в АРМ зафиксирована', ua: 'Дата і час узгоджені, запис в АРМ зафіксований', pl: 'Data i godzina ustalone, rejestracja w systemie zapisana' } as T,
-  metaPriceGlassesLabel: { ru: 'Стоимость (с очками)', ua: 'Вартість (з окулярами)', pl: 'Koszt (z okularami)' } as T,
-  metaPriceGlasses:      { ru: '99 zł', ua: '99 zł', pl: '99 zł' } as T,
+  metaPriceGlassesLabel: { ru: 'Оптометрист', ua: 'Оптометрист', pl: 'Optometrysta' } as T,
+  metaPriceGlasses:      { ru: '99 zł, при заказе очков бесплатно', ua: '99 zł, при замовленні окулярів безкоштовно', pl: '99 zł, przy zamówieniu okularów bezpłatnie' } as T,
   metaPriceConsultLabel: { ru: 'Стоимость (только консультация)', ua: 'Вартість (лише консультація)', pl: 'Koszt (tylko konsultacja)' } as T,
-  metaPriceConsult:      { ru: '199 zł', ua: '199 zł', pl: '199 zł' } as T,
+  metaPriceConsult:      { ru: '219 zł', ua: '219 zł', pl: '219 zł' } as T,
   metaAddressLabel: { ru: 'Адрес', ua: 'Адреса', pl: 'Adres' } as T,
   metaAddress:      { ru: 'Jeleniogórska 1/3 (напротив Aldi)', ua: 'Jeleniogórska 1/3 (навпроти Aldi)', pl: 'Jeleniogórska 1/3 (naprzeciwko Aldi)' } as T,
   metaPhoneLabel:   { ru: 'Телефон', ua: 'Телефон', pl: 'Telefon' } as T,
@@ -48,9 +48,9 @@ export const t = {
     pl: 'Pobranie danych pacjenta',
   } as T,
   step2: {
-    ru: `<div class="msg consultant"><div class="msg-label">Консультант</div>Отлично. Для подтверждения записи, пожалуйста, укажите:<br><br>— Фамилию и имя (латиницей)<br>— Дату рождения<br>— Контактный номер телефона</div>`,
-    ua: `<div class="msg consultant"><div class="msg-label">Консультант</div>Чудово. Для підтвердження запису, будь ласка, вкажіть:<br><br>— Прізвище та ім'я (латиницею);<br>— Дату народження;<br>— Контактний номер телефону.</div>`,
-    pl: `<div class="msg consultant"><div class="msg-label">Konsultant</div>Świetnie. W celu potwierdzenia wizyty prosimy o podanie:<br><br>— Nazwiska i imienia (łacinką)<br>— Daty urodzenia<br>— Kontaktowego numeru telefonu</div>`,
+    ru: `<div class="msg consultant"><div class="msg-label">Консультант</div>Отлично. Для подтверждения записи, пожалуйста, укажите:<br><br>— Фамилию и имя (латиницей, как в паспорте)<br>— Дату рождения<br>— Контактный номер телефона</div>`,
+    ua: `<div class="msg consultant"><div class="msg-label">Консультант</div>Чудово. Для підтвердження запису, будь ласка, вкажіть:<br><br>— Прізвище та ім'я (латиницею, як у паспорті);<br>— Дату народження;<br>— Контактний номер телефону.</div>`,
+    pl: `<div class="msg consultant"><div class="msg-label">Konsultant</div>Świetnie. W celu potwierdzenia wizyty prosimy o podanie:<br><br>— Nazwiska i imienia (łacinką, jak w paszporcie)<br>— Daty urodzenia<br>— Kontaktowego numeru telefonu</div>`,
   } as T,
 
   step3Title: {
@@ -71,8 +71,8 @@ export const t = {
   } as T,
 
   nextBtn: {
-    ru: 'Следующий шаг: Подтверждение визита →',
-    ua: 'Наступний крок: Підтвердження візиту →',
-    pl: 'Następny krok: Potwierdzenie wizyty →',
+    ru: 'Следующий шаг: Напоминание о визите →',
+    ua: 'Наступний крок: Нагадування про візит →',
+    pl: 'Następny krok: Przypomnienie o wizycie →',
   } as T,
 };

@@ -1,0 +1,103 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lang from '@/components/Lang.astro';
+import MetaBlock from '@/components/MetaBlock.astro';
+import MetaItem from '@/components/MetaItem.astro';
+import Section from '@/components/Section.astro';
+import ScriptLang from '@/components/ScriptLang.astro';
+import ScriptLangPanel from '@/components/ScriptLangPanel.astro';
+import TemplateBox from '@/components/TemplateBox.astro';
+import TipBlock from '@/components/TipBlock.astro';
+import StagePath from '@/components/StagePath.astro';
+import { t } from './_i18n';
+
+const slug = 'novye-klienty';
+const LANGS = ['ru','ua','pl'] as const;
+const REPLIES = ['reply1', 'reply2', 'reply3', 'reply4'] as const;
+---
+<BaseLayout slug={slug}>
+  <div class="page-header">
+    <div class="page-header-inner">
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <h1>{t.headerTitle[l]}</h1>
+          <p>{t.headerSub[l]}</p>
+        </Lang>
+      ))}
+    </div>
+  </div>
+
+  <div class="container">
+    <MetaBlock>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <MetaItem label={t.metaCkpLabel[l]} html={t.metaCkp[l]} />
+          <MetaItem label={t.metaStartLabel[l]} html={t.metaStart[l]} />
+          <MetaItem label={t.metaResponsibleLabel[l]} html={t.metaResponsible[l]} />
+          <MetaItem label={t.metaChannelsLabel[l]} html={t.metaChannels[l]} />
+        </Lang>
+      ))}
+    </MetaBlock>
+
+    <Section>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <div class="section-title">{t.sttlWelcome[l]}</div>
+          <div class="info-box" set:html={t.introWelcome[l]} />
+        </Lang>
+      ))}
+      <ScriptLang>
+        {LANGS.map((l) => (
+          <ScriptLangPanel lang={l} idBase="welcome">
+            <TemplateBox id={`nk-welcome-${l}`} copyLabel={t.copyLabel[l]} html={t.welcome[l]} />
+          </ScriptLangPanel>
+        ))}
+      </ScriptLang>
+    </Section>
+
+    <Section>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <div class="section-title">{t.sttlReplies[l]}</div>
+          <div class="info-box" set:html={t.introReplies[l]} />
+        </Lang>
+      ))}
+      <ScriptLang>
+        {LANGS.map((l) => (
+          <ScriptLangPanel lang={l} idBase="replies">
+            {REPLIES.map((k, i) => (
+              <>
+                <div class="step-header" style={i === 0 ? 'margin:8px 0;' : 'margin:20px 0 8px;'}><span class="step-num">{i + 1}</span> {t[`${k}Title`][l]}</div>
+                <TemplateBox id={`nk-${k}-${l}`} copyLabel={t.copyLabel[l]} html={t[k][l]} />
+              </>
+            ))}
+          </ScriptLangPanel>
+        ))}
+      </ScriptLang>
+    </Section>
+
+    <Section>
+      {LANGS.map((l) => (
+        <Lang lang={l}>
+          <div class="section-title">{t.sttlReminder[l]}</div>
+          <div class="info-box" set:html={t.introReminder[l]} />
+        </Lang>
+      ))}
+      <ScriptLang>
+        {LANGS.map((l) => (
+          <ScriptLangPanel lang={l} idBase="reminder">
+            <TemplateBox id={`nk-reminder-${l}`} copyLabel={t.copyLabel[l]} html={t.reminder[l]} />
+          </ScriptLangPanel>
+        ))}
+      </ScriptLang>
+    </Section>
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><TipBlock html={t.tip[l]} /></Lang>
+    ))}
+
+    {LANGS.map((l) => (
+      <Lang lang={l}><StagePath current={slug} lang={l} nextLabel={t.nextBtn[l]} /></Lang>
+    ))}
+  </div>
+</BaseLayout>
