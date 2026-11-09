@@ -18,11 +18,14 @@
     // Tabs
     if (t.classList.contains('tab-btn') && t.hasAttribute('data-tab')) {
       var g = group(t, 'tab-group');
-      g.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-      g.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+      // Только свои кнопки и панели: вложенные .tab-group (напр. «0 zł / 99 zł») не трогаем
+      var own = function (el) { return group(el, 'tab-group') === g; };
+      g.querySelectorAll('.tab-btn').forEach(function (b) { if (own(b)) b.classList.remove('active'); });
+      g.querySelectorAll('.tab-panel').forEach(function (p) {
+        if (!own(p)) return;
+        p.classList.toggle('active', p.getAttribute('data-tab') === t.getAttribute('data-tab'));
+      });
       t.classList.add('active');
-      var panel = g.querySelector('.tab-panel[data-tab="' + t.getAttribute('data-tab') + '"]');
-      if (panel) panel.classList.add('active');
       return;
     }
 

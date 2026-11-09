@@ -10,6 +10,8 @@ import ScriptLang from '@/components/ScriptLang.astro';
 import ScriptLangPanel from '@/components/ScriptLangPanel.astro';
 import StagePath from '@/components/StagePath.astro';
 import { t } from './_i18n';
+import { tFree } from './_i18n-opto-free';
+import { phoneFreeBody } from './_i18n-phone-free';
 
 const slug = 'kvalifikaciya';
 const LANGS = ['ru','ua','pl'] as const;
@@ -40,13 +42,26 @@ const LANGS = ['ru','ua','pl'] as const;
 
     <Tabs buttons={[{ id:'opto', label: t.tabOpto.ru }, { id:'oftal', label: t.tabOftal.ru }, { id:'start', label: t.tabStart.ru }, { id:'phone', label: t.tabPhone.ru }]}>
       <TabPanel id="phone">
-        <ScriptLang>
-          {LANGS.map((l) => (
-            <ScriptLangPanel lang={l} idBase="phone">
-              <div set:html={t.phoneBody[l]} />
-            </ScriptLangPanel>
-          ))}
-        </ScriptLang>
+        <Tabs buttons={[{ id:'phone-free', label: tFree.subFree.ru }, { id:'phone-99', label: tFree.sub99.ru }]}>
+          <TabPanel id="phone-free" first>
+            <ScriptLang>
+              {LANGS.map((l) => (
+                <ScriptLangPanel lang={l} idBase="phone-free">
+                  <div set:html={phoneFreeBody[l]} />
+                </ScriptLangPanel>
+              ))}
+            </ScriptLang>
+          </TabPanel>
+          <TabPanel id="phone-99">
+            <ScriptLang>
+              {LANGS.map((l) => (
+                <ScriptLangPanel lang={l} idBase="phone">
+                  <div set:html={t.phoneBody[l]} />
+                </ScriptLangPanel>
+              ))}
+            </ScriptLang>
+          </TabPanel>
+        </Tabs>
       </TabPanel>
 
       <TabPanel id="start">
@@ -63,13 +78,26 @@ const LANGS = ['ru','ua','pl'] as const;
       </TabPanel>
 
       <TabPanel id="opto" first>
-        <ScriptLang>
-          {LANGS.map((l) => (
-            <ScriptLangPanel lang={l} idBase="opto">
-              <div set:html={t.optoBody[l]} />
-            </ScriptLangPanel>
-          ))}
-        </ScriptLang>
+        <Tabs buttons={[{ id:'opto-free', label: tFree.subFree.ru }, { id:'opto-99', label: tFree.sub99.ru }]}>
+          <TabPanel id="opto-free" first>
+            <ScriptLang>
+              {LANGS.map((l) => (
+                <ScriptLangPanel lang={l} idBase="opto-free">
+                  <div set:html={tFree.optoFreeBody[l]} />
+                </ScriptLangPanel>
+              ))}
+            </ScriptLang>
+          </TabPanel>
+          <TabPanel id="opto-99">
+            <ScriptLang>
+              {LANGS.map((l) => (
+                <ScriptLangPanel lang={l} idBase="opto">
+                  <div set:html={t.optoBody[l]} />
+                </ScriptLangPanel>
+              ))}
+            </ScriptLang>
+          </TabPanel>
+        </Tabs>
       </TabPanel>
 
       <TabPanel id="oftal">
