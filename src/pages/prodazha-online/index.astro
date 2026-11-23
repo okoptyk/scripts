@@ -25,7 +25,13 @@ const LANGS = ['ru','ua','pl'] as const;
   </div>
 
   <div class="container">
-    <Tabs buttons={[{ id:'main', label: t.tabMain.ru }, { id:'lost', label: t.tabLost.ru }]}>
+    <Tabs buttons={[
+      { id:'main', label: t.tabMain.ru },
+      { id:'tryon', label: t.tabTryon.ru },
+      { id:'site', label: t.tabSite.ru },
+      { id:'issues', label: t.tabIssues.ru },
+      { id:'lost', label: t.tabLost.ru },
+    ]}>
       <TabPanel id="main" first>
         {LANGS.map((l) => (
           <Lang lang={l}>
@@ -36,6 +42,54 @@ const LANGS = ['ru','ua','pl'] as const;
           {LANGS.map((l) => (
             <ScriptLangPanel lang={l} idBase="main">
               <div set:html={t.mainBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+
+      <TabPanel id="tryon">
+        {LANGS.map((l) => (
+          <Lang lang={l}>
+            <div class="info-box" set:html={t.introTryon[l]} />
+          </Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="tryon">
+              <div set:html={t.tryonBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+        {LANGS.map((l) => (
+          <Lang lang={l}><TipBlock html={t.tipTryon[l]} /></Lang>
+        ))}
+      </TabPanel>
+
+      <TabPanel id="site">
+        {LANGS.map((l) => (
+          <Lang lang={l}>
+            <div class="info-box" set:html={t.introSite[l]} />
+          </Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="site">
+              <div set:html={t.siteBody[l]} />
+            </ScriptLangPanel>
+          ))}
+        </ScriptLang>
+      </TabPanel>
+
+      <TabPanel id="issues">
+        {LANGS.map((l) => (
+          <Lang lang={l}>
+            <div class="info-box" set:html={t.introIssues[l]} />
+          </Lang>
+        ))}
+        <ScriptLang>
+          {LANGS.map((l) => (
+            <ScriptLangPanel lang={l} idBase="issues">
+              <div set:html={t.issuesBody[l]} />
             </ScriptLangPanel>
           ))}
         </ScriptLang>
