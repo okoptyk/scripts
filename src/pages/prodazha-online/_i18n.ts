@@ -24,30 +24,44 @@ const CONS = { ru: 'Консультант', ua: 'Консультант', pl: '
 const CLI = { ru: 'Клиент', ua: 'Клієнт', pl: 'Klient' };
 const m = (l: Lang, text: string) => cons(MAIL[l], text + SIG[l]);
 
-// ---------- Общие тексты про ссылку Polcard by Fiserv ----------
+// ---------- Общие тексты про ссылку Polcard by Fiserv, оплату и отслеживание ----------
+const SMS = { ru: 'SMS клиенту', ua: 'SMS клієнту', pl: 'SMS do klienta' };
+const TRACK = {
+  ru: 'Номер отслеживания: [номер]<br>Отследить посылку: [ссылка для отслеживания]',
+  ua: 'Номер відстеження: [номер]<br>Відстежити посилку: [посилання для відстеження]',
+  pl: 'Numer przesyłki: [numer]<br>Śledzenie przesyłki: [link do śledzenia]',
+};
 const PAY_REMIND = {
   ru: 'Здравствуйте!<br><br>Напоминаем, что ссылка на оплату заказа ждёт Вас в письме от Polcard by Fiserv и действует до [время]. Если письма нет, ответьте нам, и мы пришлём ссылку повторно.',
   ua: 'Доброго дня!<br><br>Нагадуємо, що посилання на оплату замовлення чекає на Вас у листі від Polcard by Fiserv і діє до [час]. Якщо листа немає, дайте нам відповідь, і ми надішлемо посилання повторно.',
   pl: 'Dzień dobry,<br><br>przypominamy, że link do płatności za zamówienie czeka w wiadomości od Polcard by Fiserv i jest ważny do [godzina]. Jeśli wiadomość nie dotarła, prosimy o odpowiedź — wyślemy link ponownie.',
 };
+const PAID = {
+  ru: 'Здравствуйте!<br><br>Оплата получена, спасибо! Ваш заказ передан в работу и будет готов в течение [N] рабочих дней.<br><br>Как только отправим посылку, сразу свяжемся с Вами и пришлём данные для отслеживания.',
+  ua: 'Доброго дня!<br><br>Оплату отримано, дякуємо! Ваше замовлення передано в роботу і буде готове протягом [N] робочих днів.<br><br>Щойно відправимо посилку, одразу зв’яжемося з Вами та надішлемо дані для відстеження.',
+  pl: 'Dzień dobry,<br><br>płatność została zaksięgowana, dziękujemy! Zamówienie zostało przekazane do realizacji i będzie gotowe w ciągu [N] dni roboczych.<br><br>Gdy tylko wyślemy paczkę, od razu skontaktujemy się z Państwem i przekażemy dane do śledzenia przesyłki.',
+};
 
-// ---------- Вкладка «Клиент пишет сам»: шаги 6–8 (оплата и отправка) ----------
+// ---------- Вкладка «Клиент пишет сам»: шаги 6–9 (оплата и отправка) ----------
 const mainExtra = {
   ru:
     step(6, 'Ссылка на оплату', cli(CLI.ru, 'Анна Новак, +48 600 000 000, ul. Długa 1, Poznań, anna.nowak@example.com') +
       cons(CONS.ru, 'Спасибо, все данные получила 😊<br><br>Отправила ссылку на оплату на ваш e-mail. Письмо придёт <strong>от платёжного сервиса Polcard by Fiserv</strong>, а не с нашего адреса — проверьте, пожалуйста, «Входящие» и папку «Спам».<br><br>Ссылка действует <strong>24 часа</strong>. Сразу после оплаты передадим заказ в работу 👓')) +
     step(7, 'Через 12 часов, если не оплачено', cons(CONS.ru, 'Добрый день 😊 Напоминаю про ссылку на оплату заказа — она пришла на ваш e-mail от Polcard by Fiserv и действует до [время]. Если письмо не нашлось, напишите — пришлю новую ссылку.')) +
-    step(8, 'Заказ отправлен', cons(CONS.ru, 'Ваши очки готовы и отправлены 👓<br><br>Номер отслеживания: [номер]. Доставка — за наш счёт. Хорошего ношения!')),
+    step(8, 'Оплата принята', cons(CONS.ru, 'Оплата получена, спасибо 😊<br><br>Заказ уже в работе и будет готов в течение [N] рабочих дней. Как только отправим посылку, сразу напишу вам и пришлю данные для отслеживания.')) +
+    step(9, 'Заказ отправлен', cons(CONS.ru, 'Ваши очки готовы и отправлены 👓<br><br>' + TRACK.ru + '<br><br>Доставка — за наш счёт. Хорошего ношения!')),
   ua:
     step(6, 'Посилання на оплату', cli(CLI.ua, 'Анна Новак, +48 600 000 000, ul. Długa 1, Poznań, anna.nowak@example.com') +
       cons(CONS.ua, 'Дякую, всі дані отримала 😊<br><br>Надіслала посилання на оплату на ваш e-mail. Лист прийде <strong>від платіжного сервісу Polcard by Fiserv</strong>, а не з нашої адреси — перевірте, будь ласка, «Вхідні» та папку «Спам».<br><br>Посилання діє <strong>24 години</strong>. Одразу після оплати передамо замовлення в роботу 👓')) +
     step(7, 'Через 12 годин, якщо не оплачено', cons(CONS.ua, 'Доброго дня 😊 Нагадую про посилання на оплату замовлення — воно прийшло на ваш e-mail від Polcard by Fiserv і діє до [час]. Якщо листа не знайшлося, напишіть — надішлю нове посилання.')) +
-    step(8, 'Замовлення відправлено', cons(CONS.ua, 'Ваші окуляри готові та відправлені 👓<br><br>Номер відстеження: [номер]. Доставка — за наш рахунок. Приємного носіння!')),
+    step(8, 'Оплату прийнято', cons(CONS.ua, 'Оплату отримано, дякую 😊<br><br>Замовлення вже в роботі й буде готове протягом [N] робочих днів. Щойно відправимо посилку, одразу напишу вам і надішлю дані для відстеження.')) +
+    step(9, 'Замовлення відправлено', cons(CONS.ua, 'Ваші окуляри готові та відправлені 👓<br><br>' + TRACK.ua + '<br><br>Доставка — за наш рахунок. Приємного носіння!')),
   pl:
     step(6, 'Link do płatności', cli(CLI.pl, 'Anna Nowak, +48 600 000 000, ul. Długa 1, Poznań, anna.nowak@example.com') +
       cons(CONS.pl, 'Dziękuję, mam już wszystkie dane 😊<br><br>Wysłałam link do płatności na Państwa adres e-mail. Wiadomość przyjdzie <strong>od serwisu płatniczego Polcard by Fiserv</strong>, a nie z naszego adresu — prosimy sprawdzić skrzynkę odbiorczą i folder SPAM.<br><br>Link jest ważny <strong>24 godziny</strong>. Zaraz po płatności przekażemy zamówienie do realizacji 👓')) +
     step(7, 'Po 12 godzinach, jeśli brak płatności', cons(CONS.pl, 'Dzień dobry 😊 Przypominam o linku do płatności za zamówienie — przyszedł na Państwa e-mail od Polcard by Fiserv i jest ważny do [godzina]. Jeśli wiadomość nie dotarła, proszę napisać — wyślę nowy link.')) +
-    step(8, 'Zamówienie wysłane', cons(CONS.pl, 'Państwa okulary są gotowe i wysłane 👓<br><br>Numer przesyłki: [numer]. Dostawa na nasz koszt. Miłego noszenia!')),
+    step(8, 'Płatność przyjęta', cons(CONS.pl, 'Płatność otrzymana, dziękuję 😊<br><br>Zamówienie jest już w realizacji i będzie gotowe w ciągu [N] dni roboczych. Gdy tylko wyślemy paczkę, od razu napiszę i prześlę dane do śledzenia.')) +
+    step(9, 'Zamówienie wysłane', cons(CONS.pl, 'Państwa okulary są gotowe i wysłane 👓<br><br>' + TRACK.pl + '<br><br>Dostawa na nasz koszt. Miłego noszenia!')),
 };
 
 // ---------- Вкладка «Примерка дома» ----------
@@ -55,53 +69,80 @@ const tryonBody = {
   ru: steps(
     step(1, 'Подтверждение заказа на примерку', m('ru', 'Здравствуйте!<br><br>Спасибо за заказ на примерку оправ дома.<br><br>Как это работает:<br>1. Перед отправкой оправ мы пришлём ссылку на <strong>преавторизацию — 100 zł за каждую оправу</strong>; в Вашем заказе [N] оправ, итого [сумма] zł. Это временная блокировка суммы на карте, а не списание денег.<br>2. Вы примеряете оправы дома <strong>5 дней</strong> с момента получения посылки.<br>3. В посылке будет бланк — в нём можно отметить выбранную оправу.<br>4. Доставку в обе стороны оформляем и оплачиваем мы.<br>5. После окончания примерки блокировку снимаем полностью. Если решите оставить оправу, оплату выставим отдельной ссылкой.<br><br>Пожалуйста, подтвердите, что такие условия Вам подходят.')),
     step(2, 'Ссылка на преавторизацию — только когда оправы готовы к отправке', cli(CLI.ru, 'Да, подходит. Как пройти преавторизацию?') +
-      m('ru', 'Оправы собраны и готовы к отправке.<br><br>Мы отправили на Ваш e-mail ссылку для преавторизации на сумму <strong>[сумма] zł</strong>. Письмо придёт <strong>от платёжного сервиса Polcard by Fiserv</strong>, а не с нашего адреса — пожалуйста, проверьте «Входящие» и папку «Спам».<br><br>Ссылка действует 24 часа. Как только блокировка будет подтверждена, сразу отправим посылку.')),
-    step(3, 'Через 12 часов, если блокировка не подтверждена', m('ru', 'Здравствуйте!<br><br>Напоминаем: оправы для примерки ждут отправки. Осталось подтвердить преавторизацию по ссылке из письма от Polcard by Fiserv — ссылка действует до [время]. Если письмо не нашлось, ответьте нам, и мы пришлём новую ссылку.')),
-    step(4, 'Оправы отправлены', m('ru', 'Ваши оправы отправлены! Номер отслеживания: [номер].<br><br>В посылке лежит бланк выбора. Отметьте в нём оправу, которая понравилась, и что Вы хотите сделать:<br>☐ оставить оправу без линз<br>☐ установить в неё линзы по рецепту<br>☐ вернуть все оправы<br><br>Срок примерки — 5 дней, до [дата]. Если захотите совета, пришлите фото в оправах — с удовольствием поможем выбрать.')),
+      m('ru', 'Оправы собраны и готовы к отправке.<br><br>Мы отправили на Ваш e-mail ссылку для преавторизации на сумму <strong>[сумма] zł</strong>. Письмо придёт <strong>от платёжного сервиса Polcard by Fiserv</strong>, а не с нашего адреса — пожалуйста, проверьте «Входящие» и папку «Спам».<br><br>Ссылка действует <strong>до конца сегодняшнего дня</strong>. Как только блокировка будет подтверждена, сразу отправим посылку.')),
+    step(3, 'За 2 часа до конца рабочего дня, если блокировка не подтверждена', m('ru', 'Здравствуйте!<br><br>Напоминаем: оправы для примерки ждут отправки. Осталось подтвердить преавторизацию по ссылке из письма от Polcard by Fiserv — ссылка действует до конца сегодняшнего дня. Если письмо не нашлось, ответьте нам, и мы пришлём новую ссылку.')),
+    step(4, 'Оправы отправлены', m('ru', 'Ваши оправы отправлены!<br><br>' + TRACK.ru + '<br><br>В посылке лежит бланк выбора. Отметьте в нём оправу, которая понравилась, и что Вы хотите сделать:<br>☐ оставить оправу без линз<br>☐ установить в неё линзы по рецепту<br>☐ вернуть все оправы<br><br>Срок примерки — 5 дней, до [дата]. Если захотите совета, пришлите фото в оправах — с удовольствием поможем выбрать.')),
     step(5, '3-й день примерки', m('ru', 'Здравствуйте!<br><br>Как Вам оправы? Если сомневаетесь, пришлите фото в каждой из них — подскажем, какая лучше подходит к форме лица. Напоминаем, что срок примерки — до [дата].')),
-    step(6, 'Ответ на выбор клиента', scens(
-      scen('А', 'Оставляю оправу без линз', m('ru', 'Отличный выбор!<br><br>Остальные оправы, пожалуйста, верните вместе с бланком. Возврат мы оформим и оплатим сами — пришлём Вам данные для отправки.<br><br>Блокировку [сумма] zł снимем полностью, а для оплаты выбранной оправы [модель] — [цена] zł пришлём отдельную ссылку от Polcard by Fiserv.')),
-      scen('Б', 'Хочу линзы в выбранную оправу', m('ru', 'Прекрасно!<br><br>Пожалуйста, верните все оправы вместе с бланком — выбранную тоже: в неё мы установим линзы. Возврат оформим и оплатим сами — пришлём Вам данные для отправки.<br><br>Пришлите, пожалуйста, рецепт, и мы рассчитаем стоимость линз. Блокировку снимем полностью, а оплату очков выставим отдельной ссылкой.')),
-      scen('В', 'Ничего не подошло', m('ru', 'Спасибо, что попробовали!<br><br>Пожалуйста, верните оправы вместе с бланком. Возврат оформим и оплатим сами — пришлём Вам данные для отправки. Блокировку [сумма] zł снимем полностью сразу после получения посылки.<br><br>Если захотите, подберём другие модели для новой примерки.')),
+    step(6, 'Срок примерки вышел, а ответа нет', m('ru', 'Здравствуйте!<br><br>Срок примерки закончился [дата]. Подскажите, пожалуйста, какую оправу Вы выбрали — или ни одна не подошла? Возврат оформим за наш счёт, код для отправки придёт Вам в SMS.')),
+    step(7, 'Ответ на выбор клиента', scens(
+      scen('А', 'Оставляю оправу без линз', m('ru', 'Отличный выбор!<br><br>Остальные оправы, пожалуйста, верните вместе с бланком. Возврат мы оформим и оплатим сами — код для отправки придёт Вам в SMS.<br><br>Блокировку [сумма] zł снимем полностью, а для оплаты выбранной оправы [модель] — [цена] zł пришлём отдельную ссылку от Polcard by Fiserv.')),
+      scen('Б', 'Хочу линзы в выбранную оправу', m('ru', 'Прекрасно!<br><br>Пожалуйста, верните все оправы вместе с бланком — выбранную тоже: в неё мы установим линзы. Возврат оформим и оплатим сами — код для отправки придёт Вам в SMS.<br><br>Пришлите, пожалуйста, рецепт, и мы рассчитаем стоимость линз. Блокировку снимем полностью, а оплату очков выставим отдельной ссылкой.')),
+      scen('В', 'Ничего не подошло', m('ru', 'Спасибо, что попробовали!<br><br>Пожалуйста, верните оправы вместе с бланком. Возврат оформим и оплатим сами — код для отправки придёт Вам в SMS. Блокировку [сумма] zł снимем полностью сразу после получения посылки.<br><br>Если захотите, подберём другие модели для новой примерки.')),
     )),
-    step(7, 'Оправы вернулись: снимаем блокировку и отправляем ссылку на оплату', m('ru', 'Оправы получили, блокировка [сумма] zł снята.<br><br>Детали заказа:<br>• Оправа [модель] — [цена] zł<br>• Линзы [тип] — [цена] zł<br>• Итого: [сумма] zł<br><br>Мы отправили на Ваш e-mail ссылку на оплату от Polcard by Fiserv. Пожалуйста, проверьте «Входящие» и «Спам». Ссылка действует 24 часа.')),
-    step(8, 'Через 12 часов, если не оплачено', m('ru', PAY_REMIND.ru)),
-    step(9, 'Очки отправлены', m('ru', 'Ваши очки готовы и отправлены! Номер отслеживания: [номер]. Доставка — за наш счёт.<br><br>Спасибо, что выбрали OK.OPTYK!')),
-    step(10, 'Срок примерки вышел, а ответа нет', m('ru', 'Здравствуйте!<br><br>Срок примерки закончился [дата]. Подскажите, пожалуйста, какую оправу Вы выбрали — или ни одна не подошла? Возврат оформим за наш счёт и пришлём данные для отправки.')),
+    step(8, 'Возврат оформлен', m('ru', 'Здравствуйте!<br><br>Мы оформили возврат оправ, доставка за наш счёт. На Ваш номер телефона придёт SMS с кодом для отправки.<br><br>Код для отправки: [код]<br>Отследить возврат: [ссылка для отслеживания]<br><br>Пожалуйста, вложите в посылку бланк выбора и отправьте её до [дата].') +
+      cons(SMS.ru, 'OK.OPTYK: возврат оправ оформлен, доставка за наш счёт. Код для отправки: [код]. Отправьте посылку до [дата] в [пункт / пачкомат]. Отслеживание: [ссылка]')),
+    step(9, 'Оправы вернулись: снимаем блокировку и отправляем ссылку на оплату', scens(
+      scen('А', 'Оправа без линз', m('ru', 'Оправы получили, блокировка [сумма] zł снята.<br><br>К оплате:<br>• Оправа [модель] — [цена] zł<br><br>Мы отправили на Ваш e-mail ссылку на оплату от Polcard by Fiserv. Пожалуйста, проверьте «Входящие» и «Спам». Ссылка действует 24 часа.')),
+      scen('Б', 'Оправа с линзами', m('ru', 'Оправы получили, блокировка [сумма] zł снята.<br><br>Пожалуйста, ещё раз проверьте детали заказа:<br>• Оправа [модель] — [цена] zł<br>• Линзы [тип] — [цена] zł<br>• Диоптрии по рецепту: OP [ ], OL [ ], PD [ ] мм<br>• Итого: [сумма] zł<br><br>Если всё верно, оплатите заказ по ссылке от Polcard by Fiserv — мы отправили её на Ваш e-mail. Пожалуйста, проверьте «Входящие» и «Спам». Ссылка действует 24 часа.')),
+    )),
+    step(10, 'Через 12 часов, если не оплачено', m('ru', PAY_REMIND.ru)),
+    step(11, 'Оплата принята', scens(
+      scen('А', 'Оправа без линз', m('ru', 'Здравствуйте!<br><br>Оплата получена, спасибо! Оправа [модель] остаётся у Вас. Хорошего ношения!')),
+      scen('Б', 'Оправа с линзами', m('ru', PAID.ru)),
+    )),
+    step(12, 'Очки отправлены (вариант Б)', m('ru', 'Ваши очки готовы и отправлены!<br><br>' + TRACK.ru + '<br><br>Доставка — за наш счёт. Спасибо, что выбрали OK.OPTYK!')),
   ),
   ua: steps(
     step(1, 'Підтвердження замовлення на приміряння', m('ua', 'Доброго дня!<br><br>Дякуємо за замовлення на приміряння оправ удома.<br><br>Як це працює:<br>1. Перед відправкою оправ ми надішлемо посилання на <strong>преавторизацію — 100 zł за кожну оправу</strong>; у Вашому замовленні [N] оправ, разом [сума] zł. Це тимчасове блокування суми на картці, а не списання грошей.<br>2. Ви приміряєте оправи вдома <strong>5 днів</strong> з моменту отримання посилки.<br>3. У посилці буде бланк — у ньому можна позначити обрану оправу.<br>4. Доставку в обидва боки оформлюємо та оплачуємо ми.<br>5. Після завершення приміряння блокування знімаємо повністю. Якщо вирішите залишити оправу, оплату виставимо окремим посиланням.<br><br>Будь ласка, підтвердіть, що такі умови Вам підходять.')),
     step(2, 'Посилання на преавторизацію — лише коли оправи готові до відправки', cli(CLI.ua, 'Так, підходить. Як пройти преавторизацію?') +
-      m('ua', 'Оправи зібрані та готові до відправки.<br><br>Ми надіслали на Ваш e-mail посилання для преавторизації на суму <strong>[сума] zł</strong>. Лист прийде <strong>від платіжного сервісу Polcard by Fiserv</strong>, а не з нашої адреси — будь ласка, перевірте «Вхідні» та папку «Спам».<br><br>Посилання діє 24 години. Щойно блокування буде підтверджено, одразу відправимо посилку.')),
-    step(3, 'Через 12 годин, якщо блокування не підтверджено', m('ua', 'Доброго дня!<br><br>Нагадуємо: оправи для приміряння чекають на відправку. Залишилося підтвердити преавторизацію за посиланням з листа від Polcard by Fiserv — посилання діє до [час]. Якщо листа не знайшлося, дайте нам відповідь, і ми надішлемо нове посилання.')),
-    step(4, 'Оправи відправлено', m('ua', 'Ваші оправи відправлено! Номер відстеження: [номер].<br><br>У посилці лежить бланк вибору. Позначте в ньому оправу, яка сподобалася, і що Ви хочете зробити:<br>☐ залишити оправу без лінз<br>☐ встановити в неї лінзи за рецептом<br>☐ повернути всі оправи<br><br>Термін приміряння — 5 днів, до [дата]. Якщо захочете поради, надішліть фото в оправах — із задоволенням допоможемо обрати.')),
+      m('ua', 'Оправи зібрані та готові до відправки.<br><br>Ми надіслали на Ваш e-mail посилання для преавторизації на суму <strong>[сума] zł</strong>. Лист прийде <strong>від платіжного сервісу Polcard by Fiserv</strong>, а не з нашої адреси — будь ласка, перевірте «Вхідні» та папку «Спам».<br><br>Посилання діє <strong>до кінця сьогоднішнього дня</strong>. Щойно блокування буде підтверджено, одразу відправимо посилку.')),
+    step(3, 'За 2 години до кінця робочого дня, якщо блокування не підтверджено', m('ua', 'Доброго дня!<br><br>Нагадуємо: оправи для приміряння чекають на відправку. Залишилося підтвердити преавторизацію за посиланням з листа від Polcard by Fiserv — посилання діє до кінця сьогоднішнього дня. Якщо листа не знайшлося, дайте нам відповідь, і ми надішлемо нове посилання.')),
+    step(4, 'Оправи відправлено', m('ua', 'Ваші оправи відправлено!<br><br>' + TRACK.ua + '<br><br>У посилці лежить бланк вибору. Позначте в ньому оправу, яка сподобалася, і що Ви хочете зробити:<br>☐ залишити оправу без лінз<br>☐ встановити в неї лінзи за рецептом<br>☐ повернути всі оправи<br><br>Термін приміряння — 5 днів, до [дата]. Якщо захочете поради, надішліть фото в оправах — із задоволенням допоможемо обрати.')),
     step(5, '3-й день приміряння', m('ua', 'Доброго дня!<br><br>Як Вам оправи? Якщо вагаєтеся, надішліть фото в кожній з них — підкажемо, яка краще пасує до форми обличчя. Нагадуємо, що термін приміряння — до [дата].')),
-    step(6, 'Відповідь на вибір клієнта', scens(
-      scen('А', 'Залишаю оправу без лінз', m('ua', 'Чудовий вибір!<br><br>Решту оправ, будь ласка, поверніть разом із бланком. Повернення ми оформимо та оплатимо самі — надішлемо Вам дані для відправки.<br><br>Блокування [сума] zł знімемо повністю, а для оплати обраної оправи [модель] — [ціна] zł надішлемо окреме посилання від Polcard by Fiserv.')),
-      scen('Б', 'Хочу лінзи в обрану оправу', m('ua', 'Чудово!<br><br>Будь ласка, поверніть усі оправи разом із бланком — обрану теж: у неї ми встановимо лінзи. Повернення оформимо та оплатимо самі — надішлемо Вам дані для відправки.<br><br>Надішліть, будь ласка, рецепт, і ми розрахуємо вартість лінз. Блокування знімемо повністю, а оплату окулярів виставимо окремим посиланням.')),
-      scen('В', 'Нічого не підійшло', m('ua', 'Дякуємо, що спробували!<br><br>Будь ласка, поверніть оправи разом із бланком. Повернення оформимо та оплатимо самі — надішлемо Вам дані для відправки. Блокування [сума] zł знімемо повністю одразу після отримання посилки.<br><br>Якщо захочете, підберемо інші моделі для нового приміряння.')),
+    step(6, 'Термін приміряння минув, а відповіді немає', m('ua', 'Доброго дня!<br><br>Термін приміряння закінчився [дата]. Підкажіть, будь ласка, яку оправу Ви обрали — чи жодна не підійшла? Повернення оформимо за наш рахунок, код для відправки прийде Вам в SMS.')),
+    step(7, 'Відповідь на вибір клієнта', scens(
+      scen('А', 'Залишаю оправу без лінз', m('ua', 'Чудовий вибір!<br><br>Решту оправ, будь ласка, поверніть разом із бланком. Повернення ми оформимо та оплатимо самі — код для відправки прийде Вам в SMS.<br><br>Блокування [сума] zł знімемо повністю, а для оплати обраної оправи [модель] — [ціна] zł надішлемо окреме посилання від Polcard by Fiserv.')),
+      scen('Б', 'Хочу лінзи в обрану оправу', m('ua', 'Чудово!<br><br>Будь ласка, поверніть усі оправи разом із бланком — обрану теж: у неї ми встановимо лінзи. Повернення оформимо та оплатимо самі — код для відправки прийде Вам в SMS.<br><br>Надішліть, будь ласка, рецепт, і ми розрахуємо вартість лінз. Блокування знімемо повністю, а оплату окулярів виставимо окремим посиланням.')),
+      scen('В', 'Нічого не підійшло', m('ua', 'Дякуємо, що спробували!<br><br>Будь ласка, поверніть оправи разом із бланком. Повернення оформимо та оплатимо самі — код для відправки прийде Вам в SMS. Блокування [сума] zł знімемо повністю одразу після отримання посилки.<br><br>Якщо захочете, підберемо інші моделі для нового приміряння.')),
     )),
-    step(7, 'Оправи повернулися: знімаємо блокування й надсилаємо посилання на оплату', m('ua', 'Оправи отримали, блокування [сума] zł знято.<br><br>Деталі замовлення:<br>• Оправа [модель] — [ціна] zł<br>• Лінзи [тип] — [ціна] zł<br>• Разом: [сума] zł<br><br>Ми надіслали на Ваш e-mail посилання на оплату від Polcard by Fiserv. Будь ласка, перевірте «Вхідні» та «Спам». Посилання діє 24 години.')),
-    step(8, 'Через 12 годин, якщо не оплачено', m('ua', PAY_REMIND.ua)),
-    step(9, 'Окуляри відправлено', m('ua', 'Ваші окуляри готові та відправлені! Номер відстеження: [номер]. Доставка — за наш рахунок.<br><br>Дякуємо, що обрали OK.OPTYK!')),
-    step(10, 'Термін приміряння минув, а відповіді немає', m('ua', 'Доброго дня!<br><br>Термін приміряння закінчився [дата]. Підкажіть, будь ласка, яку оправу Ви обрали — чи жодна не підійшла? Повернення оформимо за наш рахунок і надішлемо дані для відправки.')),
+    step(8, 'Повернення оформлено', m('ua', 'Доброго дня!<br><br>Ми оформили повернення оправ, доставка за наш рахунок. На Ваш номер телефону прийде SMS з кодом для відправки.<br><br>Код для відправки: [код]<br>Відстежити повернення: [посилання для відстеження]<br><br>Будь ласка, вкладіть у посилку бланк вибору та відправте її до [дата].') +
+      cons(SMS.ua, 'OK.OPTYK: повернення оправ оформлено, доставка за наш рахунок. Код для відправки: [код]. Надішліть посилку до [дата] у [пункт / пачкомат]. Відстеження: [посилання]')),
+    step(9, 'Оправи повернулися: знімаємо блокування й надсилаємо посилання на оплату', scens(
+      scen('А', 'Оправа без лінз', m('ua', 'Оправи отримали, блокування [сума] zł знято.<br><br>До оплати:<br>• Оправа [модель] — [ціна] zł<br><br>Ми надіслали на Ваш e-mail посилання на оплату від Polcard by Fiserv. Будь ласка, перевірте «Вхідні» та «Спам». Посилання діє 24 години.')),
+      scen('Б', 'Оправа з лінзами', m('ua', 'Оправи отримали, блокування [сума] zł знято.<br><br>Будь ласка, ще раз перевірте деталі замовлення:<br>• Оправа [модель] — [ціна] zł<br>• Лінзи [тип] — [ціна] zł<br>• Діоптрії за рецептом: OP [ ], OL [ ], PD [ ] мм<br>• Разом: [сума] zł<br><br>Якщо все правильно, оплатіть замовлення за посиланням від Polcard by Fiserv — ми надіслали його на Ваш e-mail. Будь ласка, перевірте «Вхідні» та «Спам». Посилання діє 24 години.')),
+    )),
+    step(10, 'Через 12 годин, якщо не оплачено', m('ua', PAY_REMIND.ua)),
+    step(11, 'Оплату прийнято', scens(
+      scen('А', 'Оправа без лінз', m('ua', 'Доброго дня!<br><br>Оплату отримано, дякуємо! Оправа [модель] залишається у Вас. Приємного носіння!')),
+      scen('Б', 'Оправа з лінзами', m('ua', PAID.ua)),
+    )),
+    step(12, 'Окуляри відправлено (варіант Б)', m('ua', 'Ваші окуляри готові та відправлені!<br><br>' + TRACK.ua + '<br><br>Доставка — за наш рахунок. Дякуємо, що обрали OK.OPTYK!')),
   ),
   pl: steps(
     step(1, 'Potwierdzenie zamówienia na przymiarkę', m('pl', 'Dzień dobry,<br><br>dziękujemy za złożenie zamówienia na przymiarkę opraw w domu.<br><br>Jak to działa:<br>1. Przed wysyłką opraw prześlemy link do <strong>preautoryzacji — 100 zł za każdą oprawę</strong>; w Państwa zamówieniu jest [N] opraw, łącznie [kwota] zł. To tymczasowa blokada środków na karcie, a nie pobranie pieniędzy.<br>2. Przymiarka w domu trwa <strong>5 dni</strong> od otrzymania paczki.<br>3. W paczce znajdzie się formularz, w którym można zaznaczyć wybraną oprawę.<br>4. Wysyłkę w obie strony organizujemy i opłacamy my.<br>5. Po zakończeniu przymiarki blokadę zwalniamy w całości. Jeśli zdecydują się Państwo zatrzymać oprawę, płatność wyślemy osobnym linkiem.<br><br>Prosimy o potwierdzenie, czy takie warunki Państwu odpowiadają.')),
     step(2, 'Link do preautoryzacji — dopiero gdy oprawy są gotowe do wysyłki', cli(CLI.pl, 'Tak, odpowiada. Jak mam zrobić preautoryzację?') +
-      m('pl', 'Oprawy są skompletowane i gotowe do wysyłki.<br><br>Na Państwa adres e-mail wysłaliśmy link do preautoryzacji na kwotę <strong>[kwota] zł</strong>. Wiadomość przyjdzie <strong>od serwisu płatniczego Polcard by Fiserv</strong>, a nie z naszego adresu — prosimy o sprawdzenie skrzynki odbiorczej oraz folderu SPAM.<br><br>Link jest ważny 24 godziny. Gdy tylko blokada zostanie potwierdzona, od razu wyślemy paczkę.')),
-    step(3, 'Po 12 godzinach, jeśli blokada niepotwierdzona', m('pl', 'Dzień dobry,<br><br>przypominamy: oprawy do przymiarki czekają na wysyłkę. Wystarczy potwierdzić preautoryzację przez link z wiadomości od Polcard by Fiserv — link jest ważny do [godzina]. Jeśli wiadomość nie dotarła, prosimy o odpowiedź, a wyślemy nowy link.')),
-    step(4, 'Oprawy wysłane', m('pl', 'Oprawy zostały wysłane! Numer przesyłki: [numer].<br><br>W paczce znajduje się formularz wyboru. Prosimy zaznaczyć w nim oprawę, która się spodobała, i co chcą Państwo zrobić:<br>☐ zatrzymać oprawę bez soczewek<br>☐ wstawić do niej soczewki według recepty<br>☐ zwrócić wszystkie oprawy<br><br>Przymiarka trwa 5 dni, do [data]. Jeśli potrzebują Państwo porady, prosimy przesłać zdjęcia w oprawach — chętnie pomożemy wybrać.')),
+      m('pl', 'Oprawy są skompletowane i gotowe do wysyłki.<br><br>Na Państwa adres e-mail wysłaliśmy link do preautoryzacji na kwotę <strong>[kwota] zł</strong>. Wiadomość przyjdzie <strong>od serwisu płatniczego Polcard by Fiserv</strong>, a nie z naszego adresu — prosimy o sprawdzenie skrzynki odbiorczej oraz folderu SPAM.<br><br>Link jest ważny <strong>do końca dzisiejszego dnia</strong>. Gdy tylko blokada zostanie potwierdzona, od razu wyślemy paczkę.')),
+    step(3, '2 godziny przed końcem dnia pracy, jeśli blokada niepotwierdzona', m('pl', 'Dzień dobry,<br><br>przypominamy: oprawy do przymiarki czekają na wysyłkę. Wystarczy potwierdzić preautoryzację przez link z wiadomości od Polcard by Fiserv — link jest ważny do końca dzisiejszego dnia. Jeśli wiadomość nie dotarła, prosimy o odpowiedź, a wyślemy nowy link.')),
+    step(4, 'Oprawy wysłane', m('pl', 'Oprawy zostały wysłane!<br><br>' + TRACK.pl + '<br><br>W paczce znajduje się formularz wyboru. Prosimy zaznaczyć w nim oprawę, która się spodobała, i co chcą Państwo zrobić:<br>☐ zatrzymać oprawę bez soczewek<br>☐ wstawić do niej soczewki według recepty<br>☐ zwrócić wszystkie oprawy<br><br>Przymiarka trwa 5 dni, do [data]. Jeśli potrzebują Państwo porady, prosimy przesłać zdjęcia w oprawach — chętnie pomożemy wybrać.')),
     step(5, '3. dzień przymiarki', m('pl', 'Dzień dobry,<br><br>jak się Państwu podobają oprawy? W razie wątpliwości prosimy przesłać zdjęcie w każdej z nich — podpowiemy, która najlepiej pasuje do kształtu twarzy. Przypominamy, że przymiarka trwa do [data].')),
-    step(6, 'Odpowiedź na wybór klienta', scens(
-      scen('A', 'Zatrzymuję oprawę bez soczewek', m('pl', 'Świetny wybór!<br><br>Pozostałe oprawy prosimy odesłać razem z formularzem. Zwrot zorganizujemy i opłacimy sami — prześlemy dane do nadania.<br><br>Blokadę [kwota] zł zwolnimy w całości, a za wybraną oprawę [model] — [cena] zł wyślemy osobny link do płatności od Polcard by Fiserv.')),
-      scen('B', 'Chcę soczewki w wybranej oprawie', m('pl', 'Wspaniale!<br><br>Prosimy odesłać wszystkie oprawy razem z formularzem — wybraną również: wstawimy do niej soczewki. Zwrot zorganizujemy i opłacimy sami — prześlemy dane do nadania.<br><br>Prosimy o przesłanie recepty, a wycenimy soczewki. Blokadę zwolnimy w całości, a płatność za okulary wyślemy osobnym linkiem.')),
-      scen('C', 'Nic nie pasuje', m('pl', 'Dziękujemy, że Państwo spróbowali!<br><br>Prosimy odesłać oprawy razem z formularzem. Zwrot zorganizujemy i opłacimy sami — prześlemy dane do nadania. Blokadę [kwota] zł zwolnimy w całości zaraz po otrzymaniu paczki.<br><br>Jeśli Państwo zechcą, dobierzemy inne modele do kolejnej przymiarki.')),
+    step(6, 'Przymiarka minęła, a odpowiedzi brak', m('pl', 'Dzień dobry,<br><br>przymiarka zakończyła się [data]. Prosimy o informację, którą oprawę Państwo wybrali — czy może żadna nie przypadła do gustu? Zwrot zorganizujemy na nasz koszt, kod nadania przyjdzie SMS-em.')),
+    step(7, 'Odpowiedź na wybór klienta', scens(
+      scen('A', 'Zatrzymuję oprawę bez soczewek', m('pl', 'Świetny wybór!<br><br>Pozostałe oprawy prosimy odesłać razem z formularzem. Zwrot zorganizujemy i opłacimy sami — kod nadania przyjdzie SMS-em.<br><br>Blokadę [kwota] zł zwolnimy w całości, a za wybraną oprawę [model] — [cena] zł wyślemy osobny link do płatności od Polcard by Fiserv.')),
+      scen('B', 'Chcę soczewki w wybranej oprawie', m('pl', 'Wspaniale!<br><br>Prosimy odesłać wszystkie oprawy razem z formularzem — wybraną również: wstawimy do niej soczewki. Zwrot zorganizujemy i opłacimy sami — kod nadania przyjdzie SMS-em.<br><br>Prosimy o przesłanie recepty, a wycenimy soczewki. Blokadę zwolnimy w całości, a płatność za okulary wyślemy osobnym linkiem.')),
+      scen('C', 'Nic nie pasuje', m('pl', 'Dziękujemy, że Państwo spróbowali!<br><br>Prosimy odesłać oprawy razem z formularzem. Zwrot zorganizujemy i opłacimy sami — kod nadania przyjdzie SMS-em. Blokadę [kwota] zł zwolnimy w całości zaraz po otrzymaniu paczki.<br><br>Jeśli Państwo zechcą, dobierzemy inne modele do kolejnej przymiarki.')),
     )),
-    step(7, 'Oprawy wróciły: zwalniamy blokadę i wysyłamy link do płatności', m('pl', 'Otrzymaliśmy oprawy, blokada [kwota] zł została zwolniona.<br><br>Szczegóły zamówienia:<br>• Oprawa [model] — [cena] zł<br>• Soczewki [typ] — [cena] zł<br>• Razem: [kwota] zł<br><br>Na Państwa adres e-mail wysłaliśmy link do płatności od Polcard by Fiserv. Prosimy o sprawdzenie skrzynki odbiorczej oraz folderu SPAM. Link jest ważny 24 godziny.')),
-    step(8, 'Po 12 godzinach, jeśli brak płatności', m('pl', PAY_REMIND.pl)),
-    step(9, 'Okulary wysłane', m('pl', 'Państwa okulary są gotowe i zostały wysłane! Numer przesyłki: [numer]. Dostawa na nasz koszt.<br><br>Dziękujemy za wybór OK.OPTYK!')),
-    step(10, 'Przymiarka minęła, a odpowiedzi brak', m('pl', 'Dzień dobry,<br><br>przymiarka zakończyła się [data]. Prosimy o informację, którą oprawę Państwo wybrali — czy może żadna nie przypadła do gustu? Zwrot zorganizujemy na nasz koszt i prześlemy dane do nadania.')),
+    step(8, 'Zwrot przygotowany', m('pl', 'Dzień dobry,<br><br>przygotowaliśmy zwrot opraw na nasz koszt. Na Państwa numer telefonu przyjdzie SMS z kodem nadania.<br><br>Kod nadania: [kod]<br>Śledzenie zwrotu: [link do śledzenia]<br><br>Prosimy włożyć do paczki formularz wyboru i nadać ją do [data].') +
+      cons(SMS.pl, 'OK.OPTYK: przygotowaliśmy zwrot opraw na nasz koszt. Kod nadania: [kod]. Prosimy nadać paczkę do [data] w [punkt / paczkomat]. Śledzenie: [link]')),
+    step(9, 'Oprawy wróciły: zwalniamy blokadę i wysyłamy link do płatności', scens(
+      scen('A', 'Oprawa bez soczewek', m('pl', 'Otrzymaliśmy oprawy, blokada [kwota] zł została zwolniona.<br><br>Do zapłaty:<br>• Oprawa [model] — [cena] zł<br><br>Na Państwa adres e-mail wysłaliśmy link do płatności od Polcard by Fiserv. Prosimy o sprawdzenie skrzynki odbiorczej oraz folderu SPAM. Link jest ważny 24 godziny.')),
+      scen('B', 'Oprawa z soczewkami', m('pl', 'Otrzymaliśmy oprawy, blokada [kwota] zł została zwolniona.<br><br>Prosimy jeszcze raz sprawdzić szczegóły zamówienia:<br>• Oprawa [model] — [cena] zł<br>• Soczewki [typ] — [cena] zł<br>• Moc według recepty: OP [ ], OL [ ], PD [ ] mm<br>• Razem: [kwota] zł<br><br>Jeśli wszystko się zgadza, prosimy opłacić zamówienie przez link od Polcard by Fiserv — wysłaliśmy go na Państwa adres e-mail. Prosimy o sprawdzenie skrzynki odbiorczej oraz folderu SPAM. Link jest ważny 24 godziny.')),
+    )),
+    step(10, 'Po 12 godzinach, jeśli brak płatności', m('pl', PAY_REMIND.pl)),
+    step(11, 'Płatność przyjęta', scens(
+      scen('A', 'Oprawa bez soczewek', m('pl', 'Dzień dobry,<br><br>płatność została zaksięgowana, dziękujemy! Oprawa [model] zostaje u Państwa. Miłego noszenia!')),
+      scen('B', 'Oprawa z soczewkami', m('pl', PAID.pl)),
+    )),
+    step(12, 'Okulary wysłane (wariant B)', m('pl', 'Państwa okulary są gotowe i zostały wysłane!<br><br>' + TRACK.pl + '<br><br>Dostawa na nasz koszt. Dziękujemy za wybór OK.OPTYK!')),
   ),
 };
 
@@ -115,7 +156,8 @@ const siteBody = {
     step(2, 'Ссылка на оплату', cli(CLI.ru, 'Да, всё верно.') +
       m('ru', 'Спасибо за подтверждение!<br><br>Мы отправили ссылку на оплату на Ваш e-mail. Письмо придёт <strong>от платёжного сервиса Polcard by Fiserv</strong>, а не с нашего адреса — пожалуйста, проверьте «Входящие» и папку «Спам».<br><br>Ссылка действует 24 часа. Сразу после оплаты передадим заказ в работу.')),
     step(3, 'Через 12 часов, если не оплачено', m('ru', PAY_REMIND.ru)),
-    step(4, 'Заказ отправлен', m('ru', 'Ваш заказ отправлен! Номер отслеживания: [номер]. Доставка — за наш счёт.<br><br>Спасибо, что выбрали OK.OPTYK!')),
+    step(4, 'Оплата принята', m('ru', PAID.ru)),
+    step(5, 'Заказ отправлен', m('ru', 'Ваш заказ отправлен!<br><br>' + TRACK.ru + '<br><br>Доставка — за наш счёт. Спасибо, что выбрали OK.OPTYK!')),
   ),
   ua: steps(
     step(1, 'Перевірка та підтвердження замовлення', scens(
@@ -125,7 +167,8 @@ const siteBody = {
     step(2, 'Посилання на оплату', cli(CLI.ua, 'Так, усе правильно.') +
       m('ua', 'Дякуємо за підтвердження!<br><br>Ми надіслали посилання на оплату на Ваш e-mail. Лист прийде <strong>від платіжного сервісу Polcard by Fiserv</strong>, а не з нашої адреси — будь ласка, перевірте «Вхідні» та папку «Спам».<br><br>Посилання діє 24 години. Одразу після оплати передамо замовлення в роботу.')),
     step(3, 'Через 12 годин, якщо не оплачено', m('ua', PAY_REMIND.ua)),
-    step(4, 'Замовлення відправлено', m('ua', 'Ваше замовлення відправлено! Номер відстеження: [номер]. Доставка — за наш рахунок.<br><br>Дякуємо, що обрали OK.OPTYK!')),
+    step(4, 'Оплату прийнято', m('ua', PAID.ua)),
+    step(5, 'Замовлення відправлено', m('ua', 'Ваше замовлення відправлено!<br><br>' + TRACK.ua + '<br><br>Доставка — за наш рахунок. Дякуємо, що обрали OK.OPTYK!')),
   ),
   pl: steps(
     step(1, 'Sprawdzenie i potwierdzenie zamówienia', scens(
@@ -135,34 +178,32 @@ const siteBody = {
     step(2, 'Link do płatności', cli(CLI.pl, 'Tak, wszystko się zgadza.') +
       m('pl', 'Dziękujemy za potwierdzenie!<br><br>Link do płatności został wysłany na Państwa adres e-mail. Wiadomość przyjdzie <strong>od serwisu płatniczego Polcard by Fiserv</strong>, a nie z naszego adresu — prosimy o sprawdzenie skrzynki odbiorczej oraz folderu SPAM.<br><br>Link jest ważny 24 godziny. Zaraz po płatności przekażemy zamówienie do realizacji.')),
     step(3, 'Po 12 godzinach, jeśli brak płatności', m('pl', PAY_REMIND.pl)),
-    step(4, 'Zamówienie wysłane', m('pl', 'Państwa zamówienie zostało wysłane! Numer przesyłki: [numer]. Dostawa na nasz koszt.<br><br>Dziękujemy za wybór OK.OPTYK!')),
+    step(4, 'Płatność przyjęta', m('pl', PAID.pl)),
+    step(5, 'Zamówienie wysłane', m('pl', 'Państwa zamówienie zostało wysłane!<br><br>' + TRACK.pl + '<br><br>Dostawa na nasz koszt. Dziękujemy za wybór OK.OPTYK!')),
   ),
 };
 
-// ---------- Вкладка «Проблемы с заказом» ----------
+// ---------- Вкладка «Проблемы с заказом» (сначала — самые частые) ----------
 const issuesBody = {
   ru: scens(
+    scen('Линзы', 'Выбраны линзы без диоптрий', m('ru', 'Здравствуйте!<br><br>В заказе выбраны линзы без диоптрий. Так и задумано?<br><br>После Вашего подтверждения передадим заказ в работу.')),
+    scen('Примерка', 'Клиент спрашивает, что такое преавторизация', m('ru', 'Преавторизация — это временная блокировка суммы на карте на время примерки. Деньги не списываются. Мы пришлём Вам ссылку для подтверждения — она придёт на e-mail от Polcard by Fiserv. После окончания примерки блокировку снимем полностью.')),
     scen('Нет в наличии', 'Выбранной оправы уже нет', m('ru', 'Здравствуйте!<br><br>Спасибо за заказ. К сожалению, [одной / двух] из выбранных оправ уже нет в наличии. Вместо них предлагаем такие модели:<br>[ссылка]<br>[ссылка]<br><br>Подойдёт ли Вам какая-нибудь из них?')),
     scen('Ошибка цены', 'На сайте показана неверная цена', m('ru', 'Здравствуйте!<br><br>Из-за технической ошибки на нашем сайте цена оправы [модель] отображалась как [x] zł. Её правильная цена — [y] zł.<br><br>Приносим извинения за неудобства. Пожалуйста, подтвердите, хотите ли Вы оформить заказ на этих условиях.')),
-    scen('Линзы', 'Выбраны линзы без диоптрий', m('ru', 'Здравствуйте!<br><br>В заказе выбраны линзы без диоптрий. Так и задумано?<br><br>После Вашего подтверждения передадим заказ в работу.')),
-    scen('Рецепт', 'Заказаны линзы, а рецепта нет', m('ru', 'Здравствуйте!<br><br>Чтобы изготовить линзы, нам нужен Ваш рецепт. Пришлите, пожалуйста, его фото или скан — после этого подтвердим детали заказа.')),
-    scen('Примерка', 'Клиент спрашивает, что такое преавторизация', m('ru', 'Преавторизация — это временная блокировка суммы на карте на время примерки. Деньги не списываются. Мы пришлём Вам ссылку для подтверждения — она придёт на e-mail от Polcard by Fiserv. После окончания примерки блокировку снимем полностью.')),
     scen('Примерка', 'Клиент отказался от одной из оправ', m('ru', 'Конечно, учтём это и не будем отправлять оправу [модель]. Сумма преавторизации составит [новая сумма] zł.')),
   ),
   ua: scens(
+    scen('Лінзи', 'Обрано лінзи без діоптрій', m('ua', 'Доброго дня!<br><br>У замовленні обрано лінзи без діоптрій. Так і задумано?<br><br>Після Вашого підтвердження передамо замовлення в роботу.')),
+    scen('Приміряння', 'Клієнт питає, що таке преавторизація', m('ua', 'Преавторизація — це тимчасове блокування суми на картці на час приміряння. Гроші не списуються. Ми надішлемо Вам посилання для підтвердження — воно прийде на e-mail від Polcard by Fiserv. Після завершення приміряння блокування знімемо повністю.')),
     scen('Немає в наявності', 'Обраної оправи вже немає', m('ua', 'Доброго дня!<br><br>Дякуємо за замовлення. На жаль, [однієї / двох] з обраних оправ уже немає в наявності. Замість них пропонуємо такі моделі:<br>[посилання]<br>[посилання]<br><br>Чи підійде Вам якась із них?')),
     scen('Помилка ціни', 'На сайті показано неправильну ціну', m('ua', 'Доброго дня!<br><br>Через технічну помилку на нашому сайті ціна оправи [модель] відображалася як [x] zł. Її правильна ціна — [y] zł.<br><br>Перепрошуємо за незручності. Будь ласка, підтвердіть, чи бажаєте Ви оформити замовлення на цих умовах.')),
-    scen('Лінзи', 'Обрано лінзи без діоптрій', m('ua', 'Доброго дня!<br><br>У замовленні обрано лінзи без діоптрій. Так і задумано?<br><br>Після Вашого підтвердження передамо замовлення в роботу.')),
-    scen('Рецепт', 'Замовлено лінзи, а рецепта немає', m('ua', 'Доброго дня!<br><br>Щоб виготовити лінзи, нам потрібен Ваш рецепт. Надішліть, будь ласка, його фото або скан — після цього підтвердимо деталі замовлення.')),
-    scen('Приміряння', 'Клієнт питає, що таке преавторизація', m('ua', 'Преавторизація — це тимчасове блокування суми на картці на час приміряння. Гроші не списуються. Ми надішлемо Вам посилання для підтвердження — воно прийде на e-mail від Polcard by Fiserv. Після завершення приміряння блокування знімемо повністю.')),
     scen('Приміряння', 'Клієнт відмовився від однієї з оправ', m('ua', 'Звісно, врахуємо це й не відправлятимемо оправу [модель]. Сума преавторизації становитиме [нова сума] zł.')),
   ),
   pl: scens(
+    scen('Soczewki', 'Wybrano soczewki bez mocy', m('pl', 'Dzień dobry,<br><br>w zamówieniu została wybrana soczewka bez mocy. Czy jest to zamierzone?<br><br>Po potwierdzeniu przekażemy zamówienie do realizacji.')),
+    scen('Przymiarka', 'Klient pyta, czym jest preautoryzacja', m('pl', 'Preautoryzacja polega na czasowej blokadzie kwoty na karcie płatniczej na czas przymiarki. Nie jest to pobranie pieniędzy. Prześlemy Państwu link do jej potwierdzenia — przyjdzie e-mailem od Polcard by Fiserv. Po zakończeniu przymiarki blokada zostanie zwolniona w całości.')),
     scen('Brak w magazynie', 'Wybranej oprawy już nie ma', m('pl', 'Dzień dobry,<br><br>dziękujemy za zamówienie. Niestety [jedna / dwie] z wybranych opraw nie są już dostępne. W zamian proponujemy następujące modele:<br>[link]<br>[link]<br><br>Czy któraś z tych propozycji przypadnie Państwu do gustu?')),
     scen('Błąd ceny', 'Na stronie wyświetliła się zła cena', m('pl', 'Dzień dobry,<br><br>z powodu błędu technicznego na naszej stronie cena oprawy [model] została wyświetlona jako [x] zł. Jej prawidłowa cena wynosi [y] zł.<br><br>Przepraszamy za niedogodności i prosimy o potwierdzenie, czy podtrzymują Państwo chęć realizacji zamówienia na tych warunkach.')),
-    scen('Soczewki', 'Wybrano soczewki bez mocy', m('pl', 'Dzień dobry,<br><br>w zamówieniu została wybrana soczewka bez mocy. Czy jest to zamierzone?<br><br>Po potwierdzeniu przekażemy zamówienie do realizacji.')),
-    scen('Recepta', 'Zamówiono soczewki, a brak recepty', m('pl', 'Dzień dobry,<br><br>do wykonania soczewek potrzebujemy Państwa recepty. Prosimy o przesłanie jej zdjęcia lub skanu — następnie potwierdzimy szczegóły zamówienia.')),
-    scen('Przymiarka', 'Klient pyta, czym jest preautoryzacja', m('pl', 'Preautoryzacja polega na czasowej blokadzie kwoty na karcie płatniczej na czas przymiarki. Nie jest to pobranie pieniędzy. Prześlemy Państwu link do jej potwierdzenia — przyjdzie e-mailem od Polcard by Fiserv. Po zakończeniu przymiarki blokada zostanie zwolniona w całości.')),
     scen('Przymiarka', 'Klient rezygnuje z jednej z opraw', m('pl', 'Oczywiście, uwzględnimy tę informację i nie będziemy wysyłać oprawy [model]. Kwota preautoryzacji wyniesie [nowa kwota] zł.')),
   ),
 };
@@ -198,9 +239,9 @@ export const t = {
     pl: `Coś jest nie tak z zamówieniem ze strony: brak oprawy, błąd ceny, dziwne parametry soczewek. Piszemy do klienta, zanim wyślemy link do płatności lub preautoryzacji.`,
   } as T,
   tipTryon: {
-    ru: `<h4>💡 Важно при примерке</h4><ul><li><strong>Ссылку на преавторизацию отправляем только тогда, когда оправы собраны и готовы к отправке.</strong> Банк клиента держит блокировку 7–10 дней, и сократить этот срок мы не можем.</li><li style="margin-top:10px;">Пока блокировка не подтверждена, оправы не отправляем.</li><li style="margin-top:10px;">После возврата снимаем блокировку <strong>целиком</strong> в панели Polcard, а оплату выбранного выставляем <strong>отдельной ссылкой</strong>.</li><li style="margin-top:10px;">Возврат оправ оформляем и оплачиваем мы.</li><li style="margin-top:10px;">Ссылка на оплату действует 24 часа, напоминаем через 12 часов.</li></ul>`,
-    ua: `<h4>💡 Важливо під час приміряння</h4><ul><li><strong>Посилання на преавторизацію надсилаємо лише тоді, коли оправи зібрані та готові до відправки.</strong> Банк клієнта тримає блокування 7–10 днів, і скоротити цей термін ми не можемо.</li><li style="margin-top:10px;">Поки блокування не підтверджено, оправи не відправляємо.</li><li style="margin-top:10px;">Після повернення знімаємо блокування <strong>повністю</strong> в панелі Polcard, а оплату обраного виставляємо <strong>окремим посиланням</strong>.</li><li style="margin-top:10px;">Повернення оправ оформлюємо та оплачуємо ми.</li><li style="margin-top:10px;">Посилання на оплату діє 24 години, нагадуємо через 12 годин.</li></ul>`,
-    pl: `<h4>💡 Ważne przy przymiarce</h4><ul><li><strong>Link do preautoryzacji wysyłamy dopiero wtedy, gdy oprawy są skompletowane i gotowe do wysyłki.</strong> Bank klienta utrzymuje blokadę 7–10 dni i nie możemy tego skrócić.</li><li style="margin-top:10px;">Dopóki blokada nie jest potwierdzona, nie wysyłamy opraw.</li><li style="margin-top:10px;">Po zwrocie zwalniamy blokadę <strong>w całości</strong> w panelu Polcard, a płatność za wybrany produkt wysyłamy <strong>osobnym linkiem</strong>.</li><li style="margin-top:10px;">Zwrot opraw organizujemy i opłacamy my.</li><li style="margin-top:10px;">Link do płatności jest ważny 24 godziny, przypominamy po 12 godzinach.</li></ul>`,
+    ru: `<h4>💡 Важно при примерке</h4><ul><li><strong>Ссылку на преавторизацию отправляем только тогда, когда оправы собраны и готовы к отправке.</strong> Банк клиента держит блокировку 7–10 дней, и сократить этот срок мы не можем.</li><li style="margin-top:10px;">Пока блокировка не подтверждена, оправы не отправляем.</li><li style="margin-top:10px;">После возврата снимаем блокировку <strong>целиком</strong> в панели Polcard, а оплату выбранного выставляем <strong>отдельной ссылкой</strong>.</li><li style="margin-top:10px;">Возврат оправ оформляем и оплачиваем мы.</li><li style="margin-top:10px;">Ссылка на преавторизацию действует до конца текущего дня, напоминаем за 2 часа до конца рабочего дня.</li><li style="margin-top:10px;">Ссылка на оплату действует 24 часа, напоминаем через 12 часов.</li></ul>`,
+    ua: `<h4>💡 Важливо під час приміряння</h4><ul><li><strong>Посилання на преавторизацію надсилаємо лише тоді, коли оправи зібрані та готові до відправки.</strong> Банк клієнта тримає блокування 7–10 днів, і скоротити цей термін ми не можемо.</li><li style="margin-top:10px;">Поки блокування не підтверджено, оправи не відправляємо.</li><li style="margin-top:10px;">Після повернення знімаємо блокування <strong>повністю</strong> в панелі Polcard, а оплату обраного виставляємо <strong>окремим посиланням</strong>.</li><li style="margin-top:10px;">Повернення оправ оформлюємо та оплачуємо ми.</li><li style="margin-top:10px;">Посилання на преавторизацію діє до кінця поточного дня, нагадуємо за 2 години до кінця робочого дня.</li><li style="margin-top:10px;">Посилання на оплату діє 24 години, нагадуємо через 12 годин.</li></ul>`,
+    pl: `<h4>💡 Ważne przy przymiarce</h4><ul><li><strong>Link do preautoryzacji wysyłamy dopiero wtedy, gdy oprawy są skompletowane i gotowe do wysyłki.</strong> Bank klienta utrzymuje blokadę 7–10 dni i nie możemy tego skrócić.</li><li style="margin-top:10px;">Dopóki blokada nie jest potwierdzona, nie wysyłamy opraw.</li><li style="margin-top:10px;">Po zwrocie zwalniamy blokadę <strong>w całości</strong> w panelu Polcard, a płatność za wybrany produkt wysyłamy <strong>osobnym linkiem</strong>.</li><li style="margin-top:10px;">Zwrot opraw organizujemy i opłacamy my.</li><li style="margin-top:10px;">Link do preautoryzacji jest ważny do końca bieżącego dnia, przypominamy 2 godziny przed końcem dnia pracy.</li><li style="margin-top:10px;">Link do płatności jest ważny 24 godziny, przypominamy po 12 godzinach.</li></ul>`,
   } as T,
 
   tryonBody: tryonBody as T,
